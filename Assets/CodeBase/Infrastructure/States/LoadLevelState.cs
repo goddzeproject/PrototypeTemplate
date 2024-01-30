@@ -63,7 +63,8 @@ namespace CodeBase.Infrastructure.States
             GameObject hero = InitHero();
 
             InitHud(hero);
-            CameraFollow(hero);
+            GameObject vCamera = InitVirtualCamera();
+            CameraFollow(vCamera, hero);
         }
 
         private void InitSpawners()
@@ -81,15 +82,19 @@ namespace CodeBase.Infrastructure.States
             GameObject hud = _gameFactory.CreateHud();
             hud.GetComponentInChildren<ActorUI>().
                 Construct(hero.GetComponent<HeroHealth>());
-
-
         }
 
         private GameObject InitHero() => 
             _gameFactory.CreateHero(at: GameObject.FindWithTag(InitialPointTag));
 
-        private static void CameraFollow(GameObject hero) => 
-            Camera.main.GetComponent<CameraFollow>().Follow(hero);
+        private GameObject InitVirtualCamera() => 
+            _gameFactory.CreateVirtualCamera(GameObject.FindWithTag(InitialPointTag));
+
+        private static void CameraFollow(GameObject vCamera, GameObject hero)
+        {
+            if (Camera.main != null) 
+                Camera.main.GetComponent<CameraFollow>().FollowToObject(vCamera, hero);
+        }
 
         private void InformProgressReaders()
         {

@@ -28,10 +28,8 @@ namespace CodeBase.Hero
             Vector3 movementVector = Vector3.zero;
             if (!_heroAnimator.IsAttacking && _inputService.Axis.sqrMagnitude > Constants.Epsilon)
             {
-                movementVector = Camera.main.transform.TransformDirection(_inputService.Axis);
-                movementVector.y = 0;
+                movementVector = new Vector3(_inputService.Axis.x,0 ,_inputService.Axis.y  );
                 movementVector.Normalize();
-
                 transform.forward = movementVector;
             }
 

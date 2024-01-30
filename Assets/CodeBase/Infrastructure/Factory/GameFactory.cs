@@ -29,6 +29,7 @@ namespace CodeBase.Infrastructure.Factory
         public List<ISavedProgress> ProgressWriters { get; } = new List<ISavedProgress>();
 
         private GameObject HeroGameObject { get; set; }
+        private GameObject VirtualCamera { get; set; }
 
         public GameFactory(IAssets assets, IStaticDataService staticData, IRandomService random,
             IPersistentProgressService persistentProgressService, IWindowService windowService)
@@ -52,6 +53,13 @@ namespace CodeBase.Infrastructure.Factory
         {
             ProgressReaders.Clear();
             ProgressWriters.Clear();
+        }
+
+        public GameObject CreateVirtualCamera(GameObject at)
+        {
+            GameObject virtualCamera = InstantiateRegistered(AssetPath.VirtualCamera, at.transform.position);
+            VirtualCamera = virtualCamera;
+            return VirtualCamera;
         }
 
         public GameObject CreateHero(GameObject at)
