@@ -4,7 +4,7 @@
 QualitySettings:
   m_ObjectHideFlags: 0
   serializedVersion: 5
-  m_CurrentQuality: 2
+  m_CurrentQuality: 0
   m_QualitySettings:
   - serializedVersion: 2
     name: Low
@@ -19,7 +19,7 @@ QualitySettings:
     shadowCascade4Split: {x: 0.06666667, y: 0.2, z: 0.46666667}
     shadowmaskMode: 0
     skinWeights: 2
-    textureQuality: 0
+    textureQuality: 1
     anisotropicTextures: 0
     antiAliasing: 0
     softParticles: 0
@@ -43,7 +43,10 @@ QualitySettings:
     resolutionScalingFixedDPIFactor: 1
     customRenderPipeline: {fileID: 11400000, guid: 0cbe5a5be04d1f34aa5e5d039ed4080a,
       type: 2}
-    excludedTargetPlatforms: []
+    excludedTargetPlatforms:
+    - Server
+    - Android
+    - Standalone
   - serializedVersion: 2
     name: Medium
     pixelLightCount: 1
@@ -83,6 +86,8 @@ QualitySettings:
       type: 2}
     excludedTargetPlatforms:
     - WebGL
+    - Server
+    - Standalone
   - serializedVersion: 2
     name: Ultra
     pixelLightCount: 4
@@ -104,7 +109,7 @@ QualitySettings:
     realtimeReflectionProbes: 1
     billboardsFaceCameraPosition: 1
     vSyncCount: 1
-    realtimeGICPUUsage: 100
+    realtimeGICPUUsage: 75
     lodBias: 2
     maximumLODLevel: 0
     streamingMipmapsActive: 0
@@ -122,7 +127,10 @@ QualitySettings:
       type: 2}
     excludedTargetPlatforms:
     - WebGL
+    - Android
+    - Server
   m_PerPlatformDefaultQuality:
+    Android: 0
     Server: 0
     Standalone: 0
     WebGL: 0
