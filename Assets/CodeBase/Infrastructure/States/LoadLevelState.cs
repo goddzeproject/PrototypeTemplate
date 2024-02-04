@@ -80,7 +80,7 @@ namespace CodeBase.Infrastructure.States
             LevelStaticData levelData = _staticDataService.ForLevel(sceneKey);
             foreach (EnemySpawnerData spawnerData in levelData.EnemySpawners)
             {
-                _gameFactory.CreateSpawner(spawnerData.Position, spawnerData.Id, spawnerData.MonsterTypeId);
+                _gameFactory.CreateSpawner(spawnerData.Position, spawnerData.Id, spawnerData.enemyTypeId);
             }
         }
 

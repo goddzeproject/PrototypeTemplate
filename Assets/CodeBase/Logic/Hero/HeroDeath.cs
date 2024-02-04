@@ -1,4 +1,6 @@
-﻿using CodeBase.UI.Services.Windows;
+﻿using System.Collections;
+using CodeBase.Infrastructure;
+using CodeBase.UI.Services.Windows;
 using UnityEngine;
 
 namespace CodeBase.Logic.Hero
@@ -45,13 +47,20 @@ namespace CodeBase.Logic.Hero
 
             Instantiate(DeathFx, transform.position, Quaternion.identity);
             
-            OpenRMenu();
+            StartCoroutine(StartTimerOpenRMenu());
+        }
 
+        private IEnumerator StartTimerOpenRMenu()
+        {
+            yield return new WaitForSeconds(2f);
+            OpenRMenu();
         }
 
         private void OpenRMenu()
         {
             _windowsService.Open(WindowId);
         }
+        
+        
     }
 }

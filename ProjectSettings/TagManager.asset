@@ -4,12 +4,9 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - PlayerAggro
-  - PlayerCollider
-  - AttackRangeDetector
-  - FxTemporaire
   - InitialPoint
   - LoadingCurtain
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -28,7 +25,7 @@ TagManager:
   - AttackZone
   - Hittable
   - Pickup
-  - 
+  - Enemy
   - 
   - 
   - 

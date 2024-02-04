@@ -1,4 +1,5 @@
-﻿using MonoBehaviour = UnityEngine.MonoBehaviour;
+﻿using UnityEngine;
+using MonoBehaviour = UnityEngine.MonoBehaviour;
 using Quaternion = UnityEngine.Quaternion;
 using Time = UnityEngine.Time;
 using Vector3 = UnityEngine.Vector3;
@@ -7,7 +8,9 @@ namespace CodeBase.Logic.Enemy.Behaviour
 {
     public class SimpleMovement : MonoBehaviour
     {
+        public float Speed = 1f;
         private Vector3 Direction = Vector3.forward;
+        
 
         private void Start()
         {
@@ -16,7 +19,8 @@ namespace CodeBase.Logic.Enemy.Behaviour
 
         private void Update()
         {
-            transform.Translate(Direction * Time.deltaTime);
+            transform.Translate(Direction * Speed * Time.deltaTime);
+            
         }
     }
 }
