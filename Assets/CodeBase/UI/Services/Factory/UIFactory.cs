@@ -31,6 +31,13 @@ namespace CodeBase.UI.Services.Factory
             window.Construct(_progressService);
         }
 
+        public void CreateRMenu()
+        {
+            WindowConfig config = _staticData.ForWindow(WindowId.RMenu);
+            WindowBase window= Object.Instantiate(config.Prefab, _uiRoot);
+            window.Construct(_progressService);
+        }
+
         public void CreateUIRoot() => 
             _uiRoot = _assets.Initialize(UIRootPath).transform;
     }

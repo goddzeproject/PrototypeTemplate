@@ -60,11 +60,18 @@ namespace CodeBase.Infrastructure.States
         private void InitGameWorld()
         {
             InitSpawners();
+            GameObject arena = InitArena();
             GameObject hero = InitHero();
 
             InitHud(hero);
             GameObject vCamera = InitVirtualCamera();
-            CameraFollow(vCamera, hero);
+            CameraFollow(vCamera, arena);
+        }
+
+        private GameObject InitArena()
+        {
+            GameObject arena = _gameFactory.CreateArena(at: GameObject.FindWithTag(InitialPointTag));
+            return arena;
         }
 
         private void InitSpawners()
@@ -90,10 +97,10 @@ namespace CodeBase.Infrastructure.States
         private GameObject InitVirtualCamera() => 
             _gameFactory.CreateVirtualCamera(GameObject.FindWithTag(InitialPointTag));
 
-        private static void CameraFollow(GameObject vCamera, GameObject hero)
+        private static void CameraFollow(GameObject vCamera, GameObject _object)
         {
             if (Camera.main != null) 
-                Camera.main.GetComponent<CameraFollow>().FollowToObject(vCamera, hero);
+                Camera.main.GetComponent<CameraFollow>().FollowToObject(vCamera, _object);
         }
 
         private void InformProgressReaders()

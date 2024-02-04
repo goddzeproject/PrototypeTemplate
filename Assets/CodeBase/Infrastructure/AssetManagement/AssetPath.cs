@@ -2,6 +2,7 @@
 {
     public static class AssetPath
     {
+        public const string Arena = "Levels/Arena";
         public const string VirtualCamera = "Camera/VirtualCamera";
         public const string Loot = "Loot/Loot";
         public const string HeroPath = "Hero/hero";

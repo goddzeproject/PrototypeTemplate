@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7928601197276866218}
   - component: {fileID: 4759429730242034098}
   - component: {fileID: 5680922658421407066}
-  - component: {fileID: 3702913725344571993}
+  - component: {fileID: -7223703271013341998}
   m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
@@ -59,7 +59,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 0
-  m_FollowOffset: {x: 0, y: 10, z: -5}
+  m_FollowOffset: {x: 0, y: 22, z: -12}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -68,7 +68,7 @@ MonoBehaviour:
   m_YawDamping: 0
   m_RollDamping: 0
   m_AngularDamping: 0
---- !u!114 &3702913725344571993
+--- !u!114 &-7223703271013341998
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

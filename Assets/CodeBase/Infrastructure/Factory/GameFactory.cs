@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using CodeBase.Enemy;
+using CodeBase.Hero;
 using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.Infrastructure.Services;
 using CodeBase.Infrastructure.Services.PersistentProgress;
@@ -62,10 +63,17 @@ namespace CodeBase.Infrastructure.Factory
             return VirtualCamera;
         }
 
+        public GameObject CreateArena(GameObject at)
+        {
+            GameObject arena = InstantiateRegistered(AssetPath.Arena, at.transform.position);
+            return arena;
+        }
+
         public GameObject CreateHero(GameObject at)
         {
             GameObject hero = InstantiateRegistered(AssetPath.HeroPath, at.transform.position);
             HeroGameObject = hero;
+            HeroGameObject.GetComponent<HeroDeath>().Construct(_windowService);
             return HeroGameObject;
         }
 

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MonsterTypeId: 0
   Hp: 6
-  Damage: 4.6
+  Damage: 30
   MinLoot: 2
   MaxLoot: 5
   EffectiveDistance: 0.664

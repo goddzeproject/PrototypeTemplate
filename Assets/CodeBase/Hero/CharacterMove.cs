@@ -4,6 +4,7 @@ using CodeBase.Infrastructure.Services.Input;
 using CodeBase.Infrastructure.Services.PersistentProgress;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 namespace CodeBase.Hero
 {
@@ -18,7 +19,7 @@ namespace CodeBase.Hero
         [SerializeField] float rotationSpeed = 5f;
 
         private IInputService _inputService;
-        private CharacterController _characterController;
+        //private CharacterController _characterController;
         
         private Rigidbody _rigidbody;
         private Vector3 startPosition;
@@ -27,7 +28,7 @@ namespace CodeBase.Hero
         private void Awake()
         {
             _inputService = AllServices.Container.Single<IInputService>();
-            _characterController = GetComponent<CharacterController>();
+            //_characterController = GetComponent<CharacterController>();
         }
 
         private void Start()
@@ -42,7 +43,7 @@ namespace CodeBase.Hero
             //Dash();
             Friction();
             
-            DebugSpeed();
+            //DebugSpeed();
         }
 
         private void Dash()
@@ -128,9 +129,10 @@ namespace CodeBase.Hero
 
         private void Warp(Vector3Data to)
         {
-            _characterController.enabled = false;
-            transform.position = to.AsUnityVector().AddY(_characterController.height);
-            _characterController.enabled = true;
+            //_characterController.enabled = false;
+            //transform.position = to.AsUnityVector().AddY(_characterController.height);
+            transform.position = to.AsUnityVector().AddY(2f);
+            //_characterController.enabled = true;
         }
 
         private static string CurrentLevel() => 
