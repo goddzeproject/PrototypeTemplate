@@ -1,7 +1,6 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace CodeBase.Enemy
+namespace CodeBase.Logic.Enemy
 {
     [RequireComponent(typeof(Attack))]
     public class CheckAttackRange : MonoBehaviour

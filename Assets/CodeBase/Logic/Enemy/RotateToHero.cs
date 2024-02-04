@@ -1,9 +1,6 @@
-﻿using System;
-using CodeBase.Infrastructure.Factory;
-using CodeBase.Infrastructure.Services;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace CodeBase.Enemy
+namespace CodeBase.Logic.Enemy
 {
     public class RotateToHero : Follow
     {

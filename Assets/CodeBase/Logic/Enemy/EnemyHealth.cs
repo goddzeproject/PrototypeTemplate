@@ -1,10 +1,9 @@
 ﻿using System;
-using CodeBase.Logic;
 using UnityEngine;
 
-namespace CodeBase.Enemy
+namespace CodeBase.Logic.Enemy
 {
-    [RequireComponent(typeof(Animator))]
+    [RequireComponent(typeof(UnityEngine.Animator))]
     public class EnemyHealth : MonoBehaviour, IHealth
     {
         public EnemyAnimator Animator;

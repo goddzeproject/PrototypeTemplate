@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace CodeBase.Enemy
+namespace CodeBase.Logic.Enemy
 {
     public class AgentMoveToPlayer : Follow
     {

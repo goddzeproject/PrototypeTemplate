@@ -1,9 +1,9 @@
-﻿using CodeBase.Data;
-using CodeBase.Infrastructure.Factory;
+﻿using CodeBase.Infrastructure.Factory;
 using CodeBase.Infrastructure.Services.Randomizer;
+using CodeBase.Logic.Enemy;
 using UnityEngine;
 
-namespace CodeBase.Enemy
+namespace CodeBase.Logic.Loot
 {
     public class LootSpawner : MonoBehaviour
     {
@@ -34,9 +34,9 @@ namespace CodeBase.Enemy
             loot.Initialize(lootItem);
         }
 
-        private Loot GenerateLoot()
+        private Data.Loot GenerateLoot()
         {
-            return new Loot()
+            return new Data.Loot()
             {
                 Value = _random.Next(_lootMin, _lootMax)
             };

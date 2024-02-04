@@ -1,7 +1,7 @@
 ﻿using CodeBase.Infrastructure.Factory;
 using UnityEngine;
 
-namespace CodeBase.Enemy
+namespace CodeBase.Logic.Enemy
 {
     public class SayFuckToHero : Follow
     {

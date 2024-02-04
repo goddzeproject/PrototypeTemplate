@@ -1,10 +1,9 @@
 ﻿using System;
 using CodeBase.Data;
 using CodeBase.Infrastructure.Services.PersistentProgress;
-using CodeBase.Logic;
 using UnityEngine;
 
-namespace CodeBase.Hero
+namespace CodeBase.Logic.Hero
 {
     [RequireComponent(typeof(HeroAnimator))]
     public class HeroHealth : MonoBehaviour, IHealth, ISavedProgress

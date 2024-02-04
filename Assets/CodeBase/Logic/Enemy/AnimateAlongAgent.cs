@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.PlayerLoop;
 
-namespace CodeBase.Enemy
+namespace CodeBase.Logic.Enemy
 {
     [RequireComponent(typeof(NavMeshAgent))]
     [RequireComponent(typeof(EnemyAnimator))]

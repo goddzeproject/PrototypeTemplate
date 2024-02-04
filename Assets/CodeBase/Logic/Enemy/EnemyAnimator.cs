@@ -1,23 +1,23 @@
 ﻿using System;
-using CodeBase.Logic;
+using CodeBase.Logic.Animator;
 using UnityEngine;
 
-namespace CodeBase.Enemy
+namespace CodeBase.Logic.Enemy
 {
   public class EnemyAnimator : MonoBehaviour, IAnimationStateReader
   {
-    private static readonly int Attack = Animator.StringToHash("Attack_1");
-    private static readonly int Speed = Animator.StringToHash("Speed");
-    private static readonly int IsMoving = Animator.StringToHash("IsMoving");
-    private static readonly int Hit = Animator.StringToHash("Hit");
-    private static readonly int Die = Animator.StringToHash("Die");
+    private static readonly int Attack = UnityEngine.Animator.StringToHash("Attack_1");
+    private static readonly int Speed = UnityEngine.Animator.StringToHash("Speed");
+    private static readonly int IsMoving = UnityEngine.Animator.StringToHash("IsMoving");
+    private static readonly int Hit = UnityEngine.Animator.StringToHash("Hit");
+    private static readonly int Die = UnityEngine.Animator.StringToHash("Die");
 
-    private readonly int _idleStateHash = Animator.StringToHash("idle");
-    private readonly int _attackStateHash = Animator.StringToHash("attack01");
-    private readonly int _walkingStateHash = Animator.StringToHash("Move");
-    private readonly int _deathStateHash = Animator.StringToHash("die");
+    private readonly int _idleStateHash = UnityEngine.Animator.StringToHash("idle");
+    private readonly int _attackStateHash = UnityEngine.Animator.StringToHash("attack01");
+    private readonly int _walkingStateHash = UnityEngine.Animator.StringToHash("Move");
+    private readonly int _deathStateHash = UnityEngine.Animator.StringToHash("die");
 
-    private Animator _animator;
+    private UnityEngine.Animator _animator;
 
     public event Action<AnimatorState> StateEntered;
     public event Action<AnimatorState> StateExited;
@@ -25,7 +25,7 @@ namespace CodeBase.Enemy
     public AnimatorState State { get; private set; }
 
     private void Awake() => 
-      _animator = GetComponent<Animator>();
+      _animator = GetComponent<UnityEngine.Animator>();
 
     public void PlayHit() => _animator.SetTrigger(Hit);
 

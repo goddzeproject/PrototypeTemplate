@@ -1,12 +1,10 @@
-﻿using System;
-using CodeBase.Data;
+﻿using CodeBase.Data;
 using CodeBase.Infrastructure.Services;
 using CodeBase.Infrastructure.Services.Input;
 using CodeBase.Infrastructure.Services.PersistentProgress;
-using CodeBase.Logic;
 using UnityEngine;
 
-namespace CodeBase.Hero
+namespace CodeBase.Logic.Hero
 {
     [RequireComponent(typeof(HeroAnimator), typeof(CharacterController))]
     public class HeroAttack : MonoBehaviour, ISavedProgressReader

@@ -1,8 +1,7 @@
-﻿using System;
-using CodeBase.UI.Services.Windows;
+﻿using CodeBase.UI.Services.Windows;
 using UnityEngine;
 
-namespace CodeBase.Hero
+namespace CodeBase.Logic.Hero
 {
     [RequireComponent(typeof(HeroHealth))]
     public class HeroDeath : MonoBehaviour

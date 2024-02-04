@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
-using CodeBase.Enemy;
 using CodeBase.Infrastructure.Services;
 using CodeBase.Infrastructure.Services.PersistentProgress;
+using CodeBase.Logic.Enemy;
+using CodeBase.Logic.Loot;
 using CodeBase.StaticData;
 using UnityEngine;
 

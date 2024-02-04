@@ -1,8 +1,7 @@
 ﻿using System.Linq;
-using CodeBase.Logic;
 using UnityEngine;
 
-namespace CodeBase.Enemy
+namespace CodeBase.Logic.Enemy
 {
     [RequireComponent(typeof(EnemyAnimator))]
     public class Attack : MonoBehaviour

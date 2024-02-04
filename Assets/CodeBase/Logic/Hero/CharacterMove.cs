@@ -4,9 +4,8 @@ using CodeBase.Infrastructure.Services.Input;
 using CodeBase.Infrastructure.Services.PersistentProgress;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UIElements;
 
-namespace CodeBase.Hero
+namespace CodeBase.Logic.Hero
 {
     public class CharacterMove : MonoBehaviour, ISavedProgress
     {

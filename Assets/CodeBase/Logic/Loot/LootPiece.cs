@@ -1,10 +1,9 @@
 ﻿using System.Collections;
 using CodeBase.Data;
-using CodeBase.Infrastructure.Services.PersistentProgress;
 using TMPro;
 using UnityEngine;
 
-namespace CodeBase.Enemy
+namespace CodeBase.Logic.Loot
 {
     public class LootPiece : MonoBehaviour
     {
@@ -14,7 +13,7 @@ namespace CodeBase.Enemy
         public GameObject PickupPopup;
         
         
-        private Loot _loot;
+        private Data.Loot _loot;
         private bool _picked;
         private WorldData _worldData;
 
@@ -23,7 +22,7 @@ namespace CodeBase.Enemy
             _worldData = worldData;
         }
 
-        public void Initialize(Loot loot)
+        public void Initialize(Data.Loot loot)
         {
             _loot = loot;
         }

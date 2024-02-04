@@ -1,13 +1,14 @@
 ﻿using System.Collections.Generic;
-using CodeBase.Enemy;
-using CodeBase.Hero;
 using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.Infrastructure.Services;
 using CodeBase.Infrastructure.Services.PersistentProgress;
 using CodeBase.Infrastructure.Services.Randomizer;
 using CodeBase.Infrastructure.Services.StaticData;
 using CodeBase.Logic;
+using CodeBase.Logic.Enemy;
 using CodeBase.Logic.EnemySpawners;
+using CodeBase.Logic.Hero;
+using CodeBase.Logic.Loot;
 using CodeBase.StaticData;
 using CodeBase.UI;
 using CodeBase.UI.Elements;
@@ -122,15 +123,15 @@ namespace CodeBase.Infrastructure.Factory
 
             monster.GetComponent<NavMeshAgent>().speed = monsterData.MoveSpeed;
 
-            var lootSpawners = monster.GetComponentInChildren<LootSpawner>();
-            lootSpawners.Construct(this, _randomService);
-            lootSpawners.SetLoot(monsterData.MinLoot, monsterData.MaxLoot);
+            // var lootSpawners = monster.GetComponentInChildren<LootSpawner>();
+            // lootSpawners.Construct(this, _randomService);
+            // lootSpawners.SetLoot(monsterData.MinLoot, monsterData.MaxLoot);
 
-            var attack = monster.GetComponent<Attack>();
-            attack.Construct(HeroGameObject.transform);
-            attack.Damage = monsterData.Damage;
-            attack.Cleavage = monsterData.Cleavage;
-            attack.EffectiveDistance = monsterData.EffectiveDistance;
+            // var attack = monster.GetComponent<Attack>();
+            // attack.Construct(HeroGameObject.transform);
+            // attack.Damage = monsterData.Damage;
+            // attack.Cleavage = monsterData.Cleavage;
+            // attack.EffectiveDistance = monsterData.EffectiveDistance;
 
             monster.GetComponent<RotateToHero>()?.Construct(HeroGameObject.transform);
             
