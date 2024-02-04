@@ -25,6 +25,11 @@ namespace CodeBase.Hero
 
         private void Update()
         {
+            MoveCharacter();
+        }
+
+        private void MoveCharacter()
+        {
             Vector3 movementVector = Vector3.zero;
             if (!_heroAnimator.IsAttacking && _inputService.Axis.sqrMagnitude > Constants.Epsilon)
             {

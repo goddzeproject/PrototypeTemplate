@@ -24,10 +24,12 @@ namespace CodeBase.Hero
     
     public Animator Animator;
     public CharacterController CharacterController;
+    public Rigidbody Rigidbody;
 
     private void Update()
     {
-      Animator.SetFloat(MoveHash, CharacterController.velocity.magnitude, 0.1f, Time.deltaTime);
+      //Animator.SetFloat(MoveHash, CharacterController.velocity.magnitude, 0.1f, Time.deltaTime);
+      Animator.SetFloat(MoveHash, Rigidbody.velocity.magnitude, 0.1f, Time.deltaTime);
     }
 
     public bool IsAttacking => State == AnimatorState.Attack;

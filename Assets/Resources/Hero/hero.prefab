@@ -1320,10 +1320,10 @@ GameObject:
   - component: {fileID: 3259192677272278392}
   - component: {fileID: 5418240381292995166}
   - component: {fileID: 1941000699}
-  - component: {fileID: 4754175282180654619}
   - component: {fileID: 2961580928462794159}
   - component: {fileID: 5767839000035771044}
   - component: {fileID: 5920209461384257503}
+  - component: {fileID: 5157623832634381051}
   m_Layer: 12
   m_Name: hero
   m_TagString: Player
@@ -1401,7 +1401,7 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -1433,19 +1433,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Animator: {fileID: 9588594}
   CharacterController: {fileID: 7159551369589588963}
---- !u!114 &4754175282180654619
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 176288}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e003c5e97d58f4d77ad305e45c5fab75, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MovementSpeed: 4
+  Rigidbody: {fileID: 3259192677272278392}
 --- !u!114 &2961580928462794159
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1486,10 +1474,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Health: {fileID: 5767839000035771044}
-  Move: {fileID: 4754175282180654619}
+  Move: {fileID: 0}
   Attack: {fileID: 0}
   Animator: {fileID: 1941000699}
   DeathFx: {fileID: 100006, guid: 2a474af3f4c27be4e9bdce39cfe4315d, type: 3}
+--- !u!114 &5157623832634381051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 176288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec565021ef3e4148998ddcdaa5c909d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 15
+  acceleration: 2.5
+  decceleration: 3
+  velPower: 0.96
+  frictionAmount: 0.15
+  rotationSpeed: 5
 --- !u!1 &178646
 GameObject:
   m_ObjectHideFlags: 0
