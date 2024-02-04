@@ -52,7 +52,6 @@ namespace CodeBase.Logic.Enemy
             yield return new WaitForSeconds(3);
             Destroy(gameObject);
             Destroy(VFX);
-            
         }
     }
 }

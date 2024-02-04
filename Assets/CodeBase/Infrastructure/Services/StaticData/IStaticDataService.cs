@@ -7,7 +7,7 @@ namespace CodeBase.Infrastructure.Services.StaticData
     public interface IStaticDataService : IService
     {
         void LoadDataResources();
-        MonsterStaticData ForMonster(MonsterTypeId typeId);
+        EnemyStaticData ForMonster(EnemyTypeId typeId);
         LevelStaticData ForLevel(string sceneKey);
         WindowConfig ForWindow(WindowId windowId);
     }
