@@ -1,12 +1,11 @@
 ﻿using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace CodeBase.StaticData
 {
-    [CreateAssetMenu(fileName = "EnemyData", menuName = "StaticData/Enemy")]
-    public class EnemyStaticData : ScriptableObject
+    [CreateAssetMenu(fileName = "MonsterData", menuName = "StaticData/Monster")]
+    public class MonsterStaticData : ScriptableObject
     {
-        [FormerlySerializedAs("EnemyTypeId")] public EnemyTypeId enemyTypeId;
+        public MonsterTypeId MonsterTypeId;
         
         [Range(1, 100)]
         public int Hp;

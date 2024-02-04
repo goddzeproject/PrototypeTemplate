@@ -14,18 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LevelKey: Main
   EnemySpawners:
-  - Id: Main_19ec1166-d293-4c93-a1c8-45f3bbd4b246
-    MonsterTypeId: 0
-    Position: {x: -6.25, y: 0, z: -3.56}
-  - Id: Main_932172ce-ac92-426c-a9fc-475fd2bfdf7e
-    MonsterTypeId: 0
-    Position: {x: -6.25, y: 0, z: -0.29}
-  - Id: Main_3a405c3f-8511-4d45-8068-9efc8b2e8da9
-    MonsterTypeId: 0
-    Position: {x: -6.25, y: 0, z: 2.92}
   - Id: Main_da7bb927-f72e-484b-87f8-86dfb0194fb1
     MonsterTypeId: 0
-    Position: {x: -6.25, y: 0, z: 6.25}
-  - Id: Main_bbd95968-dcc1-4fff-af49-549c68956bf0
-    MonsterTypeId: 0
-    Position: {x: -6.05, y: 0, z: -5.94}
+    Position: {x: -4, y: 0, z: 3}

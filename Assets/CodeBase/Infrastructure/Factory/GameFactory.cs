@@ -99,29 +99,29 @@ namespace CodeBase.Infrastructure.Factory
             return hud;
         }
 
-        public void CreateSpawner(Vector3 at, string spawnerId, EnemyTypeId enemyTypeId)
+        public void CreateSpawner(Vector3 at, string spawnerId, MonsterTypeId monsterTypeId)
         {
             SpawnPoint spawner = InstantiateRegistered(AssetPath.Spawner, at).GetComponent<SpawnPoint>();
 
             spawner.Construct(this);
             spawner.Id = spawnerId;
-            spawner.enemyTypeId = enemyTypeId;
+            spawner.MonsterTypeId = monsterTypeId;
         }
 
-        public GameObject CreateEnemy(EnemyTypeId typeId, Transform parent)
+        public GameObject CreateMonster(MonsterTypeId typeId, Transform parent)
         {
-            EnemyStaticData enemyData = _staticData.ForMonster(typeId);
-            GameObject enemy = Object.Instantiate(enemyData.Prefab, parent.position, Quaternion.identity, parent);
+            MonsterStaticData monsterData = _staticData.ForMonster(typeId);
+            GameObject monster = Object.Instantiate(monsterData.Prefab, parent.position, Quaternion.identity, parent);
 
 
-            var health = enemy.GetComponent<IHealth>();
-            health.Current = enemyData.Hp;
-            health.Max = enemyData.Hp;
+            var health = monster.GetComponent<IHealth>();
+            health.Current = monsterData.Hp;
+            health.Max = monsterData.Hp;
 
-            enemy.GetComponent<ActorUI>().Construct(health);
-            enemy.GetComponent<AgentMoveToPlayer>().Construct(HeroGameObject.transform);
+            monster.GetComponent<ActorUI>().Construct(health);
+            monster.GetComponent<AgentMoveToPlayer>().Construct(HeroGameObject.transform);
 
-            enemy.GetComponent<NavMeshAgent>().speed = enemyData.MoveSpeed;
+            monster.GetComponent<NavMeshAgent>().speed = monsterData.MoveSpeed;
 
             // var lootSpawners = monster.GetComponentInChildren<LootSpawner>();
             // lootSpawners.Construct(this, _randomService);
@@ -133,11 +133,11 @@ namespace CodeBase.Infrastructure.Factory
             // attack.Cleavage = monsterData.Cleavage;
             // attack.EffectiveDistance = monsterData.EffectiveDistance;
 
-            enemy.GetComponent<RotateToHero>()?.Construct(HeroGameObject.transform);
+            monster.GetComponent<RotateToHero>()?.Construct(HeroGameObject.transform);
             
-            enemy.GetComponent<SayFuckToHero>()?.Construct(HeroGameObject.transform);
+            monster.GetComponent<SayFuckToHero>()?.Construct(HeroGameObject.transform);
 
-            return enemy;
+            return monster;
         }
 
         private GameObject InstantiateRegistered(string prefabPath, Vector3 at)

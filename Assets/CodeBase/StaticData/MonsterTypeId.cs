@@ -1,6 +1,6 @@
 ﻿namespace CodeBase.StaticData
 {
-    public enum EnemyTypeId
+    public enum MonsterTypeId
     {
         Lich = 0,
     }

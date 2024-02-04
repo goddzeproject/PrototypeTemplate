@@ -4,13 +4,12 @@ using CodeBase.Infrastructure.Services.PersistentProgress;
 using CodeBase.Logic.Enemy;
 using CodeBase.StaticData;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace CodeBase.Logic.EnemySpawners
 {
     public class SpawnPoint : MonoBehaviour, ISavedProgress
     {
-        [FormerlySerializedAs("MonsterTypeId")] public EnemyTypeId enemyTypeId;
+        public MonsterTypeId MonsterTypeId;
         public string Id { get; set; }
         public bool _slain;
         private EnemyDeath _enemyDeath;
@@ -31,8 +30,8 @@ namespace CodeBase.Logic.EnemySpawners
 
         private void Spawn()
         {
-            GameObject enemy = _gameFactory.CreateEnemy(enemyTypeId, transform);
-            _enemyDeath = enemy.GetComponent<EnemyDeath>();
+            GameObject monster = _gameFactory.CreateMonster(MonsterTypeId, transform);
+            _enemyDeath = monster.GetComponent<EnemyDeath>();
             _enemyDeath.Happened += Slay;
         }
 
