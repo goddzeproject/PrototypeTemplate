@@ -10,17 +10,17 @@ namespace CodeBase.StaticData
 {
     public class StaticDataService : IStaticDataService
     {
-        private const string StaticDataMonstersPath = "StaticData/Monsters";
+        private const string StaticDataEnemiesPath = "StaticData/Enemies";
         private const string StaticDataLevelsPath = "StaticData/Levels";
         private const string StaticDataWindowsPath = "StaticData/UI/WindowStaticData";
-        private Dictionary<EnemyTypeId,EnemyStaticData> _monsters;
+        private Dictionary<EnemyTypeId,EnemyStaticData> _enemies;
         private Dictionary<string,LevelStaticData> _levels;
         private Dictionary<WindowId,WindowConfig> _windowsConfigs;
 
         public void LoadDataResources()
         {
-            _monsters = Resources
-                .LoadAll<EnemyStaticData>(StaticDataMonstersPath)
+            _enemies = Resources
+                .LoadAll<EnemyStaticData>(StaticDataEnemiesPath)
                 .ToDictionary(x => x.enemyTypeId, x => x);
             
             _levels = Resources
@@ -33,8 +33,8 @@ namespace CodeBase.StaticData
                 .ToDictionary(x => x.WindowId, x => x);
         }
 
-        public EnemyStaticData ForMonster(EnemyTypeId typeId) => 
-            _monsters.TryGetValue(typeId, out EnemyStaticData staticData) 
+        public EnemyStaticData ForEnemy(EnemyTypeId typeId) => 
+            _enemies.TryGetValue(typeId, out EnemyStaticData staticData) 
                 ? staticData 
                 : null;
 

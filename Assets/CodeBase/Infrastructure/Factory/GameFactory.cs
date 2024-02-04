@@ -110,7 +110,7 @@ namespace CodeBase.Infrastructure.Factory
 
         public GameObject CreateEnemy(EnemyTypeId typeId, Transform parent)
         {
-            EnemyStaticData enemyData = _staticData.ForMonster(typeId);
+            EnemyStaticData enemyData = _staticData.ForEnemy(typeId);
             GameObject enemy = Object.Instantiate(enemyData.Prefab, parent.position, Quaternion.identity, parent);
 
 
