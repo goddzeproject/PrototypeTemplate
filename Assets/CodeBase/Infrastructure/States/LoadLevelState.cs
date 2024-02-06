@@ -1,5 +1,6 @@
 ﻿using CodeBase.CameraLogic;
 using CodeBase.Infrastructure.Factory;
+using CodeBase.Infrastructure.Services.Levels;
 using CodeBase.Infrastructure.Services.PersistentProgress;
 using CodeBase.Infrastructure.Services.StaticData;
 using CodeBase.Logic;
@@ -14,7 +15,6 @@ namespace CodeBase.Infrastructure.States
 {
     public class LoadLevelState : IPayloadedState<string>
     {
-        private const string InitialPointTag = "InitialPoint";
         private readonly GameStateMachine _stateMachine;
         private readonly SceneLoader _sceneLoader;
         private readonly LoadingCurtain _curtain;
@@ -22,9 +22,10 @@ namespace CodeBase.Infrastructure.States
         private readonly IPersistentProgressService _progressService;
         private readonly IStaticDataService _staticDataService;
         private readonly IUIFactory _uiFactory;
+        private readonly ILevelService _levelService;
 
         public LoadLevelState(GameStateMachine stateMachine, SceneLoader sceneLoader, LoadingCurtain curtain,
-            IGameFactory gameFactory, IPersistentProgressService progressService, IStaticDataService staticDataService, IUIFactory uiFactory)
+            IGameFactory gameFactory, IPersistentProgressService progressService, IStaticDataService staticDataService, IUIFactory uiFactory, ILevelService levelService)
         {
             _stateMachine = stateMachine;
             _sceneLoader = sceneLoader;
@@ -33,6 +34,7 @@ namespace CodeBase.Infrastructure.States
             _progressService = progressService;
             _staticDataService = staticDataService;
             _uiFactory = uiFactory;
+            _levelService = levelService;
         }
 
         public void Enter(string sceneName)
@@ -48,7 +50,9 @@ namespace CodeBase.Infrastructure.States
         private void OnLoaded()
         {
             InitUIRoot();
+            
             InitGameWorld();
+            
             InformProgressReaders();
             
             _stateMachine.Enter<GameLoopState>();
@@ -60,53 +64,41 @@ namespace CodeBase.Infrastructure.States
         private void InitGameWorld()
         {
             InitSpawners();
+
             GameObject arena = InitArena();
             GameObject hero = InitHero();
+            
+            SpawnEnemy();
 
             InitHud(hero);
             GameObject vCamera = InitVirtualCamera();
             CameraFollow(vCamera, arena);
         }
 
-        private GameObject InitArena()
+        private void SpawnEnemy()
         {
-            GameObject arena = _gameFactory.CreateArena(at: GameObject.FindWithTag(InitialPointTag));
-            return arena;
+            _levelService.SpawnEnemies();
         }
 
-        private void InitSpawners()
-        {
-            string sceneKey = SceneManager.GetActiveScene().name;
-            LevelStaticData levelData = _staticDataService.ForLevel(sceneKey);
-            foreach (EnemySpawnerData spawnerData in levelData.EnemySpawners)
-            {
-                _gameFactory.CreateSpawner(spawnerData.Position, spawnerData.Id, spawnerData.enemyTypeId);
-            }
-        }
+        private GameObject InitArena() => 
+            _levelService.InitArena();
 
-        private void InitHud(GameObject hero)
-        {
-            GameObject hud = _gameFactory.CreateHud();
-            hud.GetComponentInChildren<ActorUI>().
-                Construct(hero.GetComponent<HeroHealth>());
-        }
+        private void InitSpawners() => 
+            _levelService.InitLevelData();
 
         private GameObject InitHero() => 
-            _gameFactory.CreateHero(at: GameObject.FindWithTag(InitialPointTag));
+            _levelService.InitHero();
+
+        private void InitHud(GameObject hero) => 
+            _levelService.InitHud(hero);
 
         private GameObject InitVirtualCamera() => 
-            _gameFactory.CreateVirtualCamera(GameObject.FindWithTag(InitialPointTag));
+            _levelService.InitVirtualCamera();
 
-        private static void CameraFollow(GameObject vCamera, GameObject _object)
-        {
-            if (Camera.main != null) 
-                Camera.main.GetComponent<CameraFollow>().FollowToObject(vCamera, _object);
-        }
+        private void CameraFollow(GameObject vCamera, GameObject _object) => 
+            _levelService.CameraFollow(vCamera, _object);
 
-        private void InformProgressReaders()
-        {
-            foreach (ISavedProgressReader progressReader in _gameFactory.ProgressReaders)
-                progressReader.LoadProgress(_progressService.Progress);
-        }
+        private void InformProgressReaders() => 
+            _levelService.InformProgressReaders();
     }
 }

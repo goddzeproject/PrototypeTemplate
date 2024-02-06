@@ -2,6 +2,7 @@
 using CodeBase.Infrastructure.Services;
 using CodeBase.Infrastructure.Services.PersistentProgress;
 using CodeBase.Logic.Enemy;
+using CodeBase.Logic.EnemySpawners;
 using CodeBase.Logic.Loot;
 using CodeBase.StaticData;
 using UnityEngine;
@@ -19,7 +20,7 @@ namespace CodeBase.Infrastructure.Factory
         GameObject CreateHud();
         LootPiece CreateLoot();
 
-        void CreateSpawner(Vector3 at, string spawnerId, EnemyTypeId enemyTypeId);
+        SpawnPoint CreateSpawner(Vector3 at, string spawnerId, EnemyTypeId enemyTypeId, Transform spawnPosition, int unitsToSpawn, float spawnCooldown);
 
         void CleanUp();
     }

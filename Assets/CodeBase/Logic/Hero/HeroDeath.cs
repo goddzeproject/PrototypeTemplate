@@ -9,21 +9,15 @@ namespace CodeBase.Logic.Hero
     public class HeroDeath : MonoBehaviour
     {
         public HeroHealth Health;
+
         //public HeroMove Move;
         public CharacterMove Move;
         public HeroAttack Attack;
         public HeroAnimator Animator;
         public GameObject DeathFx;
-        
-        public WindowId WindowId;
-        
-        private bool _isDead;
-        private IWindowService _windowsService;
+        public bool isDead;
 
-        public void Construct(IWindowService windowsService)
-        {
-            _windowsService = windowsService;
-        }
+        private IWindowService _windowsService;
 
         private void Start() =>
             Health.HealthChanged += HealthChanged;
@@ -33,34 +27,22 @@ namespace CodeBase.Logic.Hero
 
         private void HealthChanged()
         {
-            if (!_isDead && Health.Current <= 0)
+            if (!isDead && Health.Current <= 0)
                 Die();
         }
 
         private void Die()
         {
-
-            _isDead = true;
+            isDead = true;
             Move.enabled = false;
             Animator.PlayDeath();
             //Attack.enabled = false;
-
             Instantiate(DeathFx, transform.position, Quaternion.identity);
-            
-            StartCoroutine(StartTimerOpenRMenu());
         }
 
-        private IEnumerator StartTimerOpenRMenu()
+        public void DestroyHero()
         {
-            yield return new WaitForSeconds(2f);
-            OpenRMenu();
+            Destroy(gameObject);
         }
-
-        private void OpenRMenu()
-        {
-            _windowsService.Open(WindowId);
-        }
-        
-        
     }
 }

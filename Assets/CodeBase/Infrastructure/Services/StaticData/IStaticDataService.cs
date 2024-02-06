@@ -8,7 +8,7 @@ namespace CodeBase.Infrastructure.Services.StaticData
     {
         void LoadDataResources();
         EnemyStaticData ForEnemy(EnemyTypeId typeId);
-        LevelStaticData ForLevel(string sceneKey);
+        LevelStaticData ForLevel(int levelKey);
         WindowConfig ForWindow(WindowId windowId);
     }
 }

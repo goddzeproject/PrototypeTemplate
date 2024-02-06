@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.Infrastructure.Services;
+using CodeBase.Infrastructure.Services.Levels;
 using CodeBase.Infrastructure.Services.PersistentProgress;
 using CodeBase.Infrastructure.Services.Randomizer;
 using CodeBase.Infrastructure.Services.StaticData;
@@ -26,6 +27,8 @@ namespace CodeBase.Infrastructure.Factory
         private readonly IRandomService _randomService;
         private readonly IPersistentProgressService _proggressService;
         private readonly IWindowService _windowService;
+        private readonly ILevelWatcher _ilevelWatcher;
+        private IGameFactory _gameFactoryImplementation;
 
         public List<ISavedProgressReader> ProgressReaders { get; } = new List<ISavedProgressReader>();
         public List<ISavedProgress> ProgressWriters { get; } = new List<ISavedProgress>();
@@ -34,13 +37,14 @@ namespace CodeBase.Infrastructure.Factory
         private GameObject VirtualCamera { get; set; }
 
         public GameFactory(IAssets assets, IStaticDataService staticData, IRandomService random,
-            IPersistentProgressService persistentProgressService, IWindowService windowService)
+            IPersistentProgressService persistentProgressService, IWindowService windowService, ILevelWatcher ilevelWatcher)
         {
             _assets = assets;
             _staticData = staticData;
             _randomService = random;
             _proggressService = persistentProgressService;
             _windowService = windowService;
+            _ilevelWatcher = ilevelWatcher;
         }
 
         public void Register(ISavedProgressReader progressReader)
@@ -74,7 +78,6 @@ namespace CodeBase.Infrastructure.Factory
         {
             GameObject hero = InstantiateRegistered(AssetPath.HeroPath, at.transform.position);
             HeroGameObject = hero;
-            HeroGameObject.GetComponent<HeroDeath>().Construct(_windowService);
             return HeroGameObject;
         }
 
@@ -99,13 +102,17 @@ namespace CodeBase.Infrastructure.Factory
             return hud;
         }
 
-        public void CreateSpawner(Vector3 at, string spawnerId, EnemyTypeId enemyTypeId)
+        public SpawnPoint CreateSpawner(Vector3 at, string spawnerId, EnemyTypeId enemyTypeId, Transform spawnPosition, int unitsToSpawn, float spawnCooldown)
         {
             SpawnPoint spawner = InstantiateRegistered(AssetPath.Spawner, at).GetComponent<SpawnPoint>();
 
-            spawner.Construct(this);
+            spawner.Construct(this, _ilevelWatcher);
             spawner.Id = spawnerId;
             spawner.enemyTypeId = enemyTypeId;
+            spawner.SpawnPosition = spawnPosition;
+            spawner.unitsToSpawn = unitsToSpawn;
+            spawner.SpawnCooldown = spawnCooldown;
+            return spawner;
         }
 
         public GameObject CreateEnemy(EnemyTypeId typeId, Transform parent)
@@ -119,8 +126,7 @@ namespace CodeBase.Infrastructure.Factory
             health.Max = enemyData.Hp;
 
             enemy.GetComponent<ActorUI>().Construct(health);
-            enemy.GetComponent<AgentMoveToPlayer>().Construct(HeroGameObject.transform);
-
+            enemy.GetComponent<AgentMoveToPlayer>()?.Construct(HeroGameObject.transform);
             enemy.GetComponent<NavMeshAgent>().speed = enemyData.MoveSpeed;
 
             // var lootSpawners = monster.GetComponentInChildren<LootSpawner>();

@@ -20,10 +20,8 @@ public class LevelStaticDataEditor : UnityEditor.Editor
             levelData.EnemySpawners =
                 FindObjectsOfType<SpawnMarker>()
                     .Select(x =>
-                        new EnemySpawnerData(x.GetComponent<UniqueId>().Id, x.enemyTypeId, x.transform.position))
+                        new EnemySpawnerData(x.GetComponent<UniqueId>().Id, x.enemyTypeId, x.transform.position, x.SpawnPosition, x.unitsToSpawn,x.SpawnCooldown))
                     .ToList();
-
-            levelData.LevelKey = SceneManager.GetActiveScene().name;
         }
         
         EditorUtility.SetDirty(target);

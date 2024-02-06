@@ -14,7 +14,7 @@ namespace CodeBase.StaticData
         private const string StaticDataLevelsPath = "StaticData/Levels";
         private const string StaticDataWindowsPath = "StaticData/UI/WindowStaticData";
         private Dictionary<EnemyTypeId,EnemyStaticData> _enemies;
-        private Dictionary<string,LevelStaticData> _levels;
+        private Dictionary<int,LevelStaticData> _levels;
         private Dictionary<WindowId,WindowConfig> _windowsConfigs;
 
         public void LoadDataResources()
@@ -38,8 +38,8 @@ namespace CodeBase.StaticData
                 ? staticData 
                 : null;
 
-        public LevelStaticData ForLevel(string sceneKey) =>
-            _levels.TryGetValue(sceneKey, out LevelStaticData staticData) 
+        public LevelStaticData ForLevel(int levelKey) =>
+            _levels.TryGetValue(levelKey, out LevelStaticData staticData) 
                 ? staticData 
                 : null;
 
