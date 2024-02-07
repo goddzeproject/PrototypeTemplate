@@ -18,13 +18,15 @@ namespace CodeBase.Infrastructure.States
     {
         private const string Initial = "Initial";
         private readonly GameStateMachine _stateMachine;
+        private readonly ICoroutineRunner _coroutineRunner;
         private readonly SceneLoader _sceneLoader;
 
         private readonly AllServices _services;
 
-        public BootstrapState(GameStateMachine stateMachine, SceneLoader sceneLoader, AllServices services)
+        public BootstrapState(GameStateMachine stateMachine, ICoroutineRunner coroutineRunner, SceneLoader sceneLoader, AllServices services)
         {
             _stateMachine = stateMachine;
+            _coroutineRunner = coroutineRunner;
             _sceneLoader = sceneLoader;
             _services = services;
             
@@ -51,6 +53,7 @@ namespace CodeBase.Infrastructure.States
             _services.RegisterSingle<IAssets>(new AssetProvider());
             _services.RegisterSingle<IRandomService>(new RandomService());
             _services.RegisterSingle<IPersistentProgressService>(new  PersistentProgressService());
+            _services.RegisterSingle<ICoroutineRunner>(_coroutineRunner);
 
 
             _services.RegisterSingle<IUIFactory>(new UIFactory(_services.Single<IAssets>(), _services.Single<IStaticDataService>(), _services.Single<IPersistentProgressService>()));
@@ -59,7 +62,8 @@ namespace CodeBase.Infrastructure.States
             _services.RegisterSingle<ILevelWatcher>(new LevelWatcher(
                 _services.Single<ILevelService>(), 
                 _services.Single<IStaticDataService>(), 
-                _services.Single<IWindowService>()));
+                _services.Single<IWindowService>(),
+                _services.Single<ICoroutineRunner>()));
 
             _services.RegisterSingle<IGameFactory>(new GameFactory(
                 _services.Single<IAssets>(), 
@@ -77,7 +81,7 @@ namespace CodeBase.Infrastructure.States
             _services.RegisterSingle<ISaveLoadService>(new SaveLoadService(_services.Single<IPersistentProgressService>(), 
                 _services.Single<IGameFactory>()));
         }
-
+        
         private void RegisterStaticData()
         {
             IStaticDataService staticData = new StaticDataService();

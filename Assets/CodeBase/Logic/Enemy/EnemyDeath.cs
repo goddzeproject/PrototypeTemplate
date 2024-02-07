@@ -30,7 +30,7 @@ namespace CodeBase.Logic.Enemy
                 Die();
         }
 
-        private void Die()
+        public void Die()
         {
             Health.HealthChanged -= HealthChanged;
             Animator.PlayDeath();

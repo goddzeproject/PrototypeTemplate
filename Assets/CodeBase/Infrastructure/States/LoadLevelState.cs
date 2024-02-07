@@ -23,9 +23,10 @@ namespace CodeBase.Infrastructure.States
         private readonly IStaticDataService _staticDataService;
         private readonly IUIFactory _uiFactory;
         private readonly ILevelService _levelService;
+        private readonly ILevelWatcher _levelWatcher;
 
         public LoadLevelState(GameStateMachine stateMachine, SceneLoader sceneLoader, LoadingCurtain curtain,
-            IGameFactory gameFactory, IPersistentProgressService progressService, IStaticDataService staticDataService, IUIFactory uiFactory, ILevelService levelService)
+            IGameFactory gameFactory, IPersistentProgressService progressService, IStaticDataService staticDataService, IUIFactory uiFactory, ILevelService levelService, ILevelWatcher levelWatcher)
         {
             _stateMachine = stateMachine;
             _sceneLoader = sceneLoader;
@@ -35,6 +36,7 @@ namespace CodeBase.Infrastructure.States
             _staticDataService = staticDataService;
             _uiFactory = uiFactory;
             _levelService = levelService;
+            _levelWatcher = levelWatcher;
         }
 
         public void Enter(string sceneName)
@@ -73,6 +75,8 @@ namespace CodeBase.Infrastructure.States
             InitHud(hero);
             GameObject vCamera = InitVirtualCamera();
             CameraFollow(vCamera, arena);
+
+            _levelWatcher.StartWatching();
         }
 
         private void SpawnEnemy()

@@ -12,53 +12,77 @@ using UnityEngine.PlayerLoop;
 
 namespace CodeBase.Infrastructure.Services.Levels
 {
-    public class LevelWatcher : ILevelWatcher, ICoroutineRunner
+    public class LevelWatcher : ILevelWatcher
     {
         private const string InitialPointTag = "InitialPoint";
         private readonly ILevelService _levelService;
         private readonly IStaticDataService _staticData;
         private readonly IWindowService _windowService;
-        
-        private List<SpawnPoint> _spawnPoints = new List<SpawnPoint>();
+        private readonly ICoroutineRunner _coroutineRunner;
 
-        public LevelWatcher(ILevelService levelService, IStaticDataService staticData, IWindowService windowService)
+        private List<SpawnPoint> _spawnPoints = new List<SpawnPoint>();
+        private List<GameObject> _enemies = new List<GameObject>();
+
+        private List<int> levelKey = new List<int>();
+
+        public LevelWatcher(ILevelService levelService, IStaticDataService staticData, IWindowService windowService,
+            ICoroutineRunner coroutineRunner)
         {
             _levelService = levelService;
             _staticData = staticData;
             _windowService = windowService;
+            _coroutineRunner = coroutineRunner;
         }
-        
 
-        private IEnumerable Update()
+        public void StartWatching()
         {
-            //Cycle update with coroutine;
-            WatchHero();
-            WatchRound();
-            
-            yield return new WaitForSeconds(1f);
-            
-
+            _coroutineRunner.StartCoroutine(WatchUpdate());
         }
 
-        private void WatchRound()
+        private IEnumerator WatchUpdate()
         {
-            if (true/*round Ended*/)
-                ChangeRound( 2);
+            while (true)
+            {
+                Debug.Log("Update");
+                
+                //WatchHero();
+                //WatchLevel();
+
+                yield return new WaitForSeconds(1f);
+            }
         }
 
-
-        public void ChangeRound(int levelKey)
-        {
-            _levelService.CleanUpLevelData();
-            _levelService.InitHero();
-            _levelService.InitSpawners(levelKey);
-        }
 
         private void WatchHero()
         {
             bool isDead = _levelService.HeroGameObject.GetComponent<HeroDeath>().isDead;
-            if (isDead) 
-                StartCoroutine(StartTimerOpenRMenu());
+            if (isDead)
+                _coroutineRunner.StartCoroutine(StartTimerOpenRMenu());
+        }
+
+        private void WatchLevel()
+        {
+            foreach (SpawnPoint spawnPoint in _spawnPoints) //проверка логики смены уровня
+            {
+                //if (spawnPoint.UnitsToSpawn == 0) ;
+
+            }
+            
+            if (true /*level Ended*/)
+            {
+                ChangeLevel(2);
+            }
+        }
+
+        private void ChangeLevel(int levelKey)
+        {
+            ClearAndUnregisterEnemies();
+            
+            _levelService.CleanUpLevelData();
+            _levelService.InitHero();
+            _levelService.InitSpawners(levelKey);
+            _levelService.SpawnEnemies();
+            
         }
 
         private IEnumerator StartTimerOpenRMenu()
@@ -67,28 +91,35 @@ namespace CodeBase.Infrastructure.Services.Levels
             OpenRMenu();
         }
 
-        private void OpenRMenu()
-        {
+        private void OpenRMenu() =>
             _windowService.Open(WindowId.RMenu);
+
+        private void ClearAndUnregisterEnemies()
+        {
+            foreach (var enemy in _enemies)
+            {
+                enemy.GetComponent<EnemyDeath>().Die();
+                UnRegisterEnemy(enemy);
+            }
         }
 
 
-        public void Register(SpawnPoint spawnPoint)
-        {
+        public void RegisterSpawner(SpawnPoint spawnPoint) =>
             _spawnPoints.Add(spawnPoint);
-        }
 
-        public void UnRegister(SpawnPoint spawnPoint)
+        public void UnRegisterSpawner(SpawnPoint spawnPoint)
         {
-            if (_spawnPoints.Contains(spawnPoint)) 
+            if (_spawnPoints.Contains(spawnPoint))
                 _spawnPoints.Remove(spawnPoint);
         }
 
+        public void RegisterEnemy(GameObject enemy) =>
+            _enemies.Add(enemy);
 
-        public Coroutine StartCoroutine(IEnumerator coroutine)
+        public void UnRegisterEnemy(GameObject enemy)
         {
-            Coroutine startCoroutine = StartCoroutine(coroutine);
-            return startCoroutine;
+            if (_enemies.Contains(enemy))
+                _enemies.Remove(enemy);
         }
     }
 }

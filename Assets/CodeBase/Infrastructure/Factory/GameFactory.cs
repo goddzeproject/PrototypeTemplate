@@ -110,7 +110,7 @@ namespace CodeBase.Infrastructure.Factory
             spawner.Id = spawnerId;
             spawner.enemyTypeId = enemyTypeId;
             spawner.SpawnPosition = spawnPosition;
-            spawner.unitsToSpawn = unitsToSpawn;
+            spawner.UnitsToSpawn = unitsToSpawn;
             spawner.SpawnCooldown = spawnCooldown;
             return spawner;
         }

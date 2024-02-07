@@ -16,23 +16,24 @@ namespace CodeBase.Infrastructure.Services.Levels
     {
         private const string InitialPointTag = "InitialPoint";
         private const int InitialLevel = 1;
-        
+
         private readonly IStaticDataService _staticDataService;
         private readonly IGameFactory _gameFactory;
         private readonly IPersistentProgressService _progressService;
 
         private List<SpawnPoint> _spawnPoints = new List<SpawnPoint>();
+        private List<GameObject> _enemies = new List<GameObject>();
+        
         public GameObject HeroGameObject { get; set; }
 
-        public LevelService(IGameFactory gameFactory, IStaticDataService staticDataService, IPersistentProgressService progressService)
+        public LevelService(IGameFactory gameFactory, IStaticDataService staticDataService,
+            IPersistentProgressService progressService)
         {
             _gameFactory = gameFactory;
             _staticDataService = staticDataService;
             _progressService = progressService;
         }
 
-
-        
 
         public void InitLevelData()
         {
@@ -56,7 +57,7 @@ namespace CodeBase.Infrastructure.Services.Levels
                 SpawnPoint spawnPoint = _gameFactory.CreateSpawner(spawnerData.Position, spawnerData.Id,
                     spawnerData.enemyTypeId,
                     spawnerData.SpawnPosition, spawnerData.AmountEnemies, spawnerData.SpawnCooldown);
-                
+
                 _spawnPoints.Add(spawnPoint);
             }
         }
@@ -71,22 +72,21 @@ namespace CodeBase.Infrastructure.Services.Levels
         {
         }
 
-        public GameObject InitArena() => 
+        public GameObject InitArena() =>
             _gameFactory.CreateArena(at: GameObject.FindWithTag(InitialPointTag));
 
         public void InitHud(GameObject hero)
         {
             GameObject hud = _gameFactory.CreateHud();
-            hud.GetComponentInChildren<ActorUI>().
-                Construct(hero.GetComponent<HeroHealth>());
+            hud.GetComponentInChildren<ActorUI>().Construct(hero.GetComponent<HeroHealth>());
         }
 
-        public GameObject InitVirtualCamera() => 
+        public GameObject InitVirtualCamera() =>
             _gameFactory.CreateVirtualCamera(GameObject.FindWithTag(InitialPointTag));
 
         public void CameraFollow(GameObject vCamera, GameObject _object)
         {
-            if (Camera.main != null) 
+            if (Camera.main != null)
                 Camera.main.GetComponent<CameraFollow>().FollowToObject(vCamera, _object);
         }
 
@@ -95,9 +95,22 @@ namespace CodeBase.Infrastructure.Services.Levels
             foreach (ISavedProgressReader progressReader in _gameFactory.ProgressReaders)
                 progressReader.LoadProgress(_progressService.Progress);
         }
-        
+
 
         public void CleanUpLevelData()
+        {
+            ClearSpawners();
+            
+            ClearHero();
+        }
+
+        private void ClearHero()
+        {
+            if (HeroGameObject != null)
+                HeroGameObject.GetComponent<HeroDeath>().DestroyHero();
+        }
+
+        private void ClearSpawners()
         {
             foreach (var spawnPoint in _spawnPoints)
             {
@@ -105,9 +118,6 @@ namespace CodeBase.Infrastructure.Services.Levels
                     spawnPoint.DestroySpawner();
             }
             _spawnPoints.Clear();
-
-             if (HeroGameObject != null) 
-                 HeroGameObject.GetComponent<HeroDeath>().DestroyHero();
         }
     }
 }
