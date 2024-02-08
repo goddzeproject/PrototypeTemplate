@@ -19,13 +19,15 @@ namespace CodeBase.Logic.EnemySpawners
         public string Id { get; set; }
         public bool _slain;
 
-        public Transform SpawnPosition; // где он должен их отспавнить
-        [FormerlySerializedAs("unitsToSpawn")] public int UnitsToSpawn; // количество сколько должен отспавнить мобов этот спавнер
+        public Vector3 SpawnDirection; // где он должен их отспавнить
+        public int UnitsToSpawn; // количество сколько должен отспавнить мобов этот спавнер
         public float SpawnCooldown; // с каким кулдауном он будеи их спавнить
+        public float FirstDelay;
 
         private EnemyDeath _enemyDeath;
         private IGameFactory _gameFactory;
         private ILevelWatcher _levelWatcher;
+        private bool _isFirstSpawn;
 
         public void Construct(IGameFactory gameFactory, ILevelWatcher iLevelWatcher)
         {
@@ -48,7 +50,13 @@ namespace CodeBase.Logic.EnemySpawners
         {
             while (UnitsToSpawn > 0)
             {
-                GameObject enemy = _gameFactory.CreateEnemy(enemyTypeId, transform);
+                if (!_isFirstSpawn)
+                {
+                    yield return new WaitForSeconds(FirstDelay);
+                    _isFirstSpawn = true;
+                }
+                
+                GameObject enemy = _gameFactory.CreateEnemy(enemyTypeId, transform, SpawnDirection);
                 _levelWatcher.RegisterEnemy(enemy);
                 UnitsToSpawn--;
                 yield return new WaitForSeconds(SpawnCooldown);

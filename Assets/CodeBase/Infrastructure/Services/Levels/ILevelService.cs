@@ -20,7 +20,6 @@ namespace CodeBase.Infrastructure.Services.Levels
         GameObject InitVirtualCamera();
 
         void CameraFollow(GameObject vCamera, GameObject _object);
-
         
         void InformProgressReaders();
         void ClenUpProgressReaders();

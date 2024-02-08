@@ -7,6 +7,7 @@ using CodeBase.Infrastructure.Services.Randomizer;
 using CodeBase.Infrastructure.Services.StaticData;
 using CodeBase.Logic;
 using CodeBase.Logic.Enemy;
+using CodeBase.Logic.Enemy.Behaviour;
 using CodeBase.Logic.EnemySpawners;
 using CodeBase.Logic.Hero;
 using CodeBase.Logic.Loot;
@@ -103,20 +104,21 @@ namespace CodeBase.Infrastructure.Factory
             return hud;
         }
 
-        public SpawnPoint CreateSpawner(Vector3 at, string spawnerId, EnemyTypeId enemyTypeId, Transform spawnPosition, int unitsToSpawn, float spawnCooldown)
+        public SpawnPoint CreateSpawner(Vector3 at, string spawnerId, EnemyTypeId enemyTypeId, Vector3 spawnDirection, int unitsToSpawn, float spawnCooldown, float firstDelay)
         {
             SpawnPoint spawner = InstantiateRegistered(AssetPath.Spawner, at).GetComponent<SpawnPoint>();
 
             spawner.Construct(this, _ilevelWatcher);
             spawner.Id = spawnerId;
             spawner.enemyTypeId = enemyTypeId;
-            spawner.SpawnPosition = spawnPosition;
+            spawner.SpawnDirection = spawnDirection;
             spawner.UnitsToSpawn = unitsToSpawn;
             spawner.SpawnCooldown = spawnCooldown;
+            spawner.FirstDelay = firstDelay;
             return spawner;
         }
 
-        public GameObject CreateEnemy(EnemyTypeId typeId, Transform parent)
+        public GameObject CreateEnemy(EnemyTypeId typeId, Transform parent, Vector3 direction)
         {
             EnemyStaticData enemyData = _staticData.ForEnemy(typeId);
             GameObject enemy = Object.Instantiate(enemyData.Prefab, parent.position, Quaternion.identity, parent);
@@ -126,7 +128,7 @@ namespace CodeBase.Infrastructure.Factory
             health.Current = enemyData.Hp;
             health.Max = enemyData.Hp;
 
-            
+            enemy.GetComponent<SimpleMovement>()?.Construct(direction);
             enemy.GetComponent<ActorUI>().Construct(health);
             enemy.GetComponent<AgentMoveToPlayer>()?.Construct(HeroGameObject.transform);
             enemy.GetComponent<NavMeshAgent>().speed = enemyData.MoveSpeed;

@@ -31,6 +31,7 @@ namespace CodeBase.UI.Elements
 
         private void Restart()
         {
+            _levelWatcher.RestartLevel(1);
             _levelWatcher.ChangeLevel(1);
             Destroy(gameObject);
         }

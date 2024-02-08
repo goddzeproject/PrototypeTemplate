@@ -43,6 +43,11 @@ namespace CodeBase.Infrastructure.Services.Levels
         public int ReturnCurrentLevel() => 
             LevelKey;
 
+        public void RestartLevel(int levelKey)
+        {
+            LevelKey = levelKey;
+        }
+
         public void StartWatching()
         {
             _coroutineRunner.StartCoroutine(WatchUpdate());

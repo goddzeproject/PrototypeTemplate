@@ -56,7 +56,10 @@ namespace CodeBase.Infrastructure.Services.Levels
             {
                 SpawnPoint spawnPoint = _gameFactory.CreateSpawner(spawnerData.Position, spawnerData.Id,
                     spawnerData.enemyTypeId,
-                    spawnerData.SpawnPosition, spawnerData.AmountEnemies, spawnerData.SpawnCooldown);
+                    spawnerData.SpawnDirection, 
+                    spawnerData.AmountEnemies, 
+                    spawnerData.SpawnCooldown, 
+                    spawnerData.FirstDelay);
 
                 _spawnPoints.Add(spawnPoint);
             }

@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyTypeId: 0
-  SpawnPosition: {fileID: 4456854836619406254}
+  SpawnPosition: {fileID: 0}
   unitsToSpawn: 0
   SpawnCooldown: 0
 --- !u!114 &7840381902459950304
@@ -61,4 +61,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfb9bba383c24274ba5d6b373cf5defc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Id: SpawnMarker_a587a922-ffeb-4c19-b431-3281d9e38af4
+  Id: SpawnMarker_c24d88a7-7f88-43af-a81a-304c56ca4231

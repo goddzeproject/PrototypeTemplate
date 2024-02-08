@@ -7,8 +7,9 @@ namespace CodeBase.Logic.EnemySpawners
     public class SpawnMarker : MonoBehaviour
     {
         [FormerlySerializedAs("MonsterTypeId")] public EnemyTypeId enemyTypeId;
-        public Transform SpawnPosition;
+        [FormerlySerializedAs("SpawnPosition")] public Vector3 SpawnDirection;
         [FormerlySerializedAs("AmountEnemies")] public int unitsToSpawn;
         public float SpawnCooldown;
+        public float FirstDelay;
     }
 }

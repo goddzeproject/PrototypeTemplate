@@ -20,7 +20,13 @@ public class LevelStaticDataEditor : UnityEditor.Editor
             levelData.EnemySpawners =
                 FindObjectsOfType<SpawnMarker>()
                     .Select(x =>
-                        new EnemySpawnerData(x.GetComponent<UniqueId>().Id, x.enemyTypeId, x.transform.position, x.SpawnPosition, x.unitsToSpawn,x.SpawnCooldown))
+                        new EnemySpawnerData(x.GetComponent<UniqueId>().Id,
+                            x.enemyTypeId,
+                            x.transform.position,
+                            x.SpawnDirection, 
+                            x.unitsToSpawn,
+                            x.SpawnCooldown,
+                            x.FirstDelay))
                     .ToList();
         }
         

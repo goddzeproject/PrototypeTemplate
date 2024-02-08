@@ -1,26 +1,28 @@
-﻿using UnityEngine;
-using MonoBehaviour = UnityEngine.MonoBehaviour;
-using Quaternion = UnityEngine.Quaternion;
-using Time = UnityEngine.Time;
-using Vector3 = UnityEngine.Vector3;
+﻿
+using UnityEngine;
 
 namespace CodeBase.Logic.Enemy.Behaviour
 {
     public class SimpleMovement : MonoBehaviour
     {
         public float Speed = 1f;
-        private Vector3 Direction = Vector3.forward;
-        
+        private Vector3 _direction;
+
+
+        public void Construct(Vector3 direction)
+        {
+            _direction = direction;
+        }
 
         private void Start()
         {
-            transform.rotation = Quaternion.LookRotation(Vector3.right);
+            //transform.LookAt(transform.position + _direction);
+            transform.rotation = Quaternion.LookRotation(_direction);
         }
 
         private void Update()
         {
-            transform.Translate(Direction * Speed * Time.deltaTime);
-            
+            transform.Translate(_direction * Speed * Time.deltaTime, Space.World);
         }
     }
 }

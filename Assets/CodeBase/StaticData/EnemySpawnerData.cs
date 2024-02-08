@@ -10,18 +10,20 @@ namespace CodeBase.StaticData
         public string Id;
         [FormerlySerializedAs("MonsterTypeId")] public EnemyTypeId enemyTypeId;
         public Vector3 Position;
-        public Transform SpawnPosition;
+        public Vector3 SpawnDirection;
         public int AmountEnemies;
         public float SpawnCooldown;
+        public float FirstDelay;
 
-        public EnemySpawnerData(string id, EnemyTypeId enemyTypeId, Vector3 position, Transform spawnPosition, int amountEnemies, float spawnCooldown)
+        public EnemySpawnerData(string id, EnemyTypeId enemyTypeId, Vector3 position, Vector3 spawnDirection, int amountEnemies, float spawnCooldown, float firstDelay)
         {
             Id = id;
             this.enemyTypeId = enemyTypeId;
             Position = position;
-            SpawnPosition = spawnPosition;
+            SpawnDirection = spawnDirection;
             AmountEnemies = amountEnemies;
             SpawnCooldown = spawnCooldown;
+            FirstDelay = firstDelay;
         }
     }
 }
