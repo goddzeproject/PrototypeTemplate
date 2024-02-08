@@ -6,7 +6,9 @@ namespace CodeBase.Infrastructure.Services.Levels
 {
     public interface ILevelWatcher : IService
     {
+        int ReturnCurrentLevel();
         void StartWatching();
+        void ChangeLevel(int levelKey);
         void RegisterHero(GameObject hero);
         void RegisterSpawner(SpawnPoint spawnPoint);
         void RegisterEnemy(GameObject enemy);

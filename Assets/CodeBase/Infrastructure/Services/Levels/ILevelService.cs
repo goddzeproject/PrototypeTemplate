@@ -14,17 +14,19 @@ namespace CodeBase.Infrastructure.Services.Levels
 
         GameObject InitArena();
 
-        void InitHud(GameObject hero);
+        GameObject InitHud(GameObject hero);
         GameObject InitHero();
 
         GameObject InitVirtualCamera();
 
         void CameraFollow(GameObject vCamera, GameObject _object);
 
+        
         void InformProgressReaders();
-
-        void ClearSpawners();
+        void ClenUpProgressReaders();
         void ClearHero();
+        void UpdateHud();
+        void ClearSpawners();
         void ClearEnemies();
         
         

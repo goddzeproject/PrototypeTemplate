@@ -11,6 +11,7 @@ namespace CodeBase.Logic.Hero
         public HeroAnimator Animator;
         private State _state;
         
+        
         public event Action HealthChanged;
 
         public float Current
@@ -47,7 +48,7 @@ namespace CodeBase.Logic.Hero
 
         public void TakeDamage(float damage)
         {
-            if (Current <= 0)
+            if (Current <= 0) // 0?
                 return;
 
             Current -= damage;

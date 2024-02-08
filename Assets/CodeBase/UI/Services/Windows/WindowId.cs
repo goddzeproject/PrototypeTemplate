@@ -4,6 +4,6 @@
     {
         Unknown = 0,
         Shop = 1,
-        RMenu = 2,
+        RestartMenu = 2,
     }
 }

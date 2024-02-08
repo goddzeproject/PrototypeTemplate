@@ -395,7 +395,7 @@ RectTransform:
   m_Children:
   - {fileID: 8488121056342540415}
   m_Father: {fileID: 1198110311400335403}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -497,7 +497,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Button: {fileID: 6535454740455182241}
-  WindowId: 1
+  WindowId: 2
 --- !u!1 &8998490273243501067
 GameObject:
   m_ObjectHideFlags: 0
@@ -797,7 +797,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 22409286, guid: 81acfa4b78dfa47499a6c2fd6e521ebd, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22409286, guid: 81acfa4b78dfa47499a6c2fd6e521ebd, type: 3}
       propertyPath: m_AnchorMax.x
@@ -929,7 +929,7 @@ PrefabInstance:
     - target: {fileID: 1426700483063998009, guid: b711883c71592b649acc6d30d1a50b87,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1426700483063998009, guid: b711883c71592b649acc6d30d1a50b87,
         type: 3}

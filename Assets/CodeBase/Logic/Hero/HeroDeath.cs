@@ -11,7 +11,7 @@ namespace CodeBase.Logic.Hero
         public HeroHealth Health;
 
         //public HeroMove Move;
-        public CharacterMove Move;
+        public HeroMove Move;
         public HeroAttack Attack;
         public HeroAnimator Animator;
         public GameObject DeathFx;
@@ -37,11 +37,12 @@ namespace CodeBase.Logic.Hero
             Move.enabled = false;
             Animator.PlayDeath();
             //Attack.enabled = false;
-            Instantiate(DeathFx, transform.position, Quaternion.identity);
+            DeathFx = Instantiate(DeathFx, transform.position, Quaternion.identity);
         }
 
         public void DestroyHero()
         {
+            Destroy(DeathFx);
             Destroy(gameObject);
         }
     }

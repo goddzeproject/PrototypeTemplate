@@ -21,8 +21,8 @@ namespace CodeBase.UI.Services.Windows
                 case WindowId.Shop:
                     _uiFactory.CreateShop();
                     break;
-                case WindowId.RMenu:
-                    _uiFactory.CreateRMenu();
+                case WindowId.RestartMenu:
+                    _uiFactory.CreateRestartMenu();
                     break;
             }
         }

@@ -14,15 +14,13 @@ namespace CodeBase.UI.Elements
         private void Pause()
         {
             isPaused = !isPaused;
-            
-            if (isPaused)
+
+            if (isPaused & Time.timeScale != 0)
             {
-                // Если пауза включена, устанавливаем Time.timeScale в 0
                 Time.timeScale = 0;
             }
             else
             {
-                // Если пауза выключена, возвращаем Time.timeScale в 1
                 Time.timeScale = 1;
             }
         }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using CodeBase.CameraLogic;
+using CodeBase.Data;
 using CodeBase.Infrastructure.Factory;
 using CodeBase.Infrastructure.Services.PersistentProgress;
 using CodeBase.Infrastructure.Services.StaticData;
@@ -24,6 +25,7 @@ namespace CodeBase.Infrastructure.Services.Levels
         private List<SpawnPoint> _spawnPoints = new List<SpawnPoint>();
         private List<GameObject> _enemies = new List<GameObject>();
         private GameObject HeroGameObject { set; get; }
+        private GameObject Hud { set; get; }
 
         public LevelService(IGameFactory gameFactory, IStaticDataService staticDataService,
             IPersistentProgressService progressService)
@@ -41,7 +43,7 @@ namespace CodeBase.Infrastructure.Services.Levels
 
         public GameObject InitHero()
         {
-            var hero = _gameFactory.CreateHero(GameObject.FindWithTag(InitialPointTag));
+            GameObject hero = _gameFactory.CreateHero(GameObject.FindWithTag(InitialPointTag));
             HeroGameObject = hero;
             return HeroGameObject;
         }
@@ -66,16 +68,16 @@ namespace CodeBase.Infrastructure.Services.Levels
             {
                 spawnPoint.Spawn();
             }
-                
         }
 
         public GameObject InitArena() =>
             _gameFactory.CreateArena(at: GameObject.FindWithTag(InitialPointTag));
 
-        public void InitHud(GameObject hero)
+        public GameObject InitHud(GameObject hero)
         {
             GameObject hud = _gameFactory.CreateHud();
-            hud.GetComponentInChildren<ActorUI>().Construct(hero.GetComponent<HeroHealth>());
+            //hud.GetComponentInChildren<ActorUI>().Construct(hero.GetComponent<HeroHealth>());
+            return hud;
         }
 
         public GameObject InitVirtualCamera() =>
@@ -89,14 +91,25 @@ namespace CodeBase.Infrastructure.Services.Levels
 
         public void InformProgressReaders()
         {
+            _progressService.Progress.HeroState.ResetHP();
             foreach (ISavedProgressReader progressReader in _gameFactory.ProgressReaders)
                 progressReader.LoadProgress(_progressService.Progress);
+        }
+
+        public void ClenUpProgressReaders()
+        {
+            //_gameFactory.CleanUp();
         }
 
         public void ClearHero()
         {
             if (HeroGameObject != null)
                 HeroGameObject.GetComponent<HeroDeath>().DestroyHero();
+        }
+
+        public void UpdateHud()
+        {
+            //feture logic of update level count and etc...
         }
 
         public void ClearSpawners()
@@ -117,9 +130,8 @@ namespace CodeBase.Infrastructure.Services.Levels
                 if (enemy != null)
                     enemy.GetComponent<EnemyDeath>().Die();
             }
+
             _enemies.Clear();
         }
-        
-        
     }
 }

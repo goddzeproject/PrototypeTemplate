@@ -23,11 +23,12 @@ namespace CodeBase.Infrastructure.Services.Levels
         private List<SpawnPoint> _spawnPoints = new List<SpawnPoint>();
         private List<GameObject> _enemies = new List<GameObject>();
 
-        private int _levelKey = 2;
+        public int LevelKey = 1;
 
         public GameObject HeroGameObject;
 
         private bool _isWindowOpen;
+
 
         public LevelWatcher(ILevelService levelService, IStaticDataService staticData, IWindowService windowService,
             ICoroutineRunner coroutineRunner)
@@ -36,7 +37,11 @@ namespace CodeBase.Infrastructure.Services.Levels
             _staticData = staticData;
             _windowService = windowService;
             _coroutineRunner = coroutineRunner;
+            
         }
+
+        public int ReturnCurrentLevel() => 
+            LevelKey;
 
         public void StartWatching()
         {
@@ -51,7 +56,7 @@ namespace CodeBase.Infrastructure.Services.Levels
                 Debug.Log("Update");
 
                 if (!WatchHero() & WatchSpawners() & WatchEnemies())
-                    ChangeLevel(_levelKey++);
+                    ChangeLevel(++LevelKey);
 
                 yield return new WaitForSeconds(1f);
             }
@@ -61,7 +66,7 @@ namespace CodeBase.Infrastructure.Services.Levels
         public void RegisterHero(GameObject hero) =>
             HeroGameObject = hero;
 
-        private void ChangeLevel(int levelKey) // Смена уровня - подчистка старого уровня и вызов создания нового
+        public void ChangeLevel(int levelKey) // Смена уровня - подчистка старого уровня и вызов создания нового
         {
             Debug.Log(levelKey);
             
@@ -72,7 +77,8 @@ namespace CodeBase.Infrastructure.Services.Levels
             if (WatchHero())
             {
                 _levelService.ClearHero();
-                _levelService.InitHero();
+                GameObject hero = _levelService.InitHero();
+                //_levelService.InitHud(hero);
             }
 
             _levelService.InitSpawners(levelKey);
@@ -80,6 +86,8 @@ namespace CodeBase.Infrastructure.Services.Levels
             _levelService.SpawnEnemies();
 
             _isWindowOpen = false;
+            
+            _levelService.InformProgressReaders();
         }
 
         private bool WatchHero() // проверка живой ли герой и вызов Окна при смерти
@@ -111,7 +119,7 @@ namespace CodeBase.Infrastructure.Services.Levels
         }
 
         private void OpenRMenu() =>
-            _windowService.Open(WindowId.RMenu);
+            _windowService.Open(WindowId.RestartMenu);
 
         private void ClearAndUnregisterEnemies()
         {

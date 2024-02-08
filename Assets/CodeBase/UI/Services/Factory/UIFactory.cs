@@ -31,9 +31,9 @@ namespace CodeBase.UI.Services.Factory
             window.Construct(_progressService);
         }
 
-        public void CreateRMenu()
+        public void CreateRestartMenu()
         {
-            WindowConfig config = _staticData.ForWindow(WindowId.RMenu);
+            WindowConfig config = _staticData.ForWindow(WindowId.RestartMenu);
             WindowBase window= Object.Instantiate(config.Prefab, _uiRoot);
             window.Construct(_progressService);
         }
