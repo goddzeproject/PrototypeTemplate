@@ -15,7 +15,7 @@ namespace CodeBase.Infrastructure.Services.Levels
     public class LevelWatcher : ILevelWatcher
     {
         private const string InitialPointTag = "InitialPoint";
-        private readonly ILevelService _levelService;
+        private ILevelService _levelService;
         private readonly IStaticDataService _staticData;
         private readonly IWindowService _windowService;
         private readonly ICoroutineRunner _coroutineRunner;
@@ -23,7 +23,11 @@ namespace CodeBase.Infrastructure.Services.Levels
         private List<SpawnPoint> _spawnPoints = new List<SpawnPoint>();
         private List<GameObject> _enemies = new List<GameObject>();
 
-        private List<int> levelKey = new List<int>();
+        private int _levelKey = 2;
+
+        public GameObject HeroGameObject;
+
+        private bool _isWindowOpen;
 
         public LevelWatcher(ILevelService levelService, IStaticDataService staticData, IWindowService windowService,
             ICoroutineRunner coroutineRunner)
@@ -37,6 +41,7 @@ namespace CodeBase.Infrastructure.Services.Levels
         public void StartWatching()
         {
             _coroutineRunner.StartCoroutine(WatchUpdate());
+            _levelService = AllServices.Container.Single<ILevelService>(); // Это пока Костыль!!!
         }
 
         private IEnumerator WatchUpdate()
@@ -44,45 +49,59 @@ namespace CodeBase.Infrastructure.Services.Levels
             while (true)
             {
                 Debug.Log("Update");
-                
-                //WatchHero();
-                //WatchLevel();
+
+                if (!WatchHero() & WatchSpawners() & WatchEnemies())
+                    ChangeLevel(_levelKey++);
 
                 yield return new WaitForSeconds(1f);
             }
         }
 
 
-        private void WatchHero()
-        {
-            bool isDead = _levelService.HeroGameObject.GetComponent<HeroDeath>().isDead;
-            if (isDead)
-                _coroutineRunner.StartCoroutine(StartTimerOpenRMenu());
-        }
+        public void RegisterHero(GameObject hero) =>
+            HeroGameObject = hero;
 
-        private void WatchLevel()
+        private void ChangeLevel(int levelKey) // Смена уровня - подчистка старого уровня и вызов создания нового
         {
-            foreach (SpawnPoint spawnPoint in _spawnPoints) //проверка логики смены уровня
-            {
-                //if (spawnPoint.UnitsToSpawn == 0) ;
-
-            }
+            Debug.Log(levelKey);
             
-            if (true /*level Ended*/)
-            {
-                ChangeLevel(2);
-            }
-        }
-
-        private void ChangeLevel(int levelKey)
-        {
             ClearAndUnregisterEnemies();
-            
-            _levelService.CleanUpLevelData();
-            _levelService.InitHero();
+            _levelService.ClearEnemies();
+            _levelService.ClearSpawners();
+
+            if (WatchHero())
+            {
+                _levelService.ClearHero();
+                _levelService.InitHero();
+            }
+
             _levelService.InitSpawners(levelKey);
-            _levelService.SpawnEnemies();
             
+            _levelService.SpawnEnemies();
+
+            _isWindowOpen = false;
+        }
+
+        private bool WatchHero() // проверка живой ли герой и вызов Окна при смерти
+        {
+            bool isDead = HeroGameObject.GetComponent<HeroDeath>().isDead;
+            if (isDead && !_isWindowOpen)
+            {
+                _coroutineRunner.StartCoroutine(StartTimerOpenRMenu());
+                _isWindowOpen = true;
+            }
+
+            return isDead;
+        }
+
+        private bool WatchSpawners() // проверка за спавнерами
+        {
+            return _spawnPoints.Count != 0 && _spawnPoints.All(spawnPoint => spawnPoint.UnitsToSpawn == 0);
+        }
+
+        private bool WatchEnemies() // проверка врагов
+        {
+            return _enemies.All(enemies => enemies.GetComponent<EnemyGone>().isGone);
         }
 
         private IEnumerator StartTimerOpenRMenu()
@@ -96,11 +115,13 @@ namespace CodeBase.Infrastructure.Services.Levels
 
         private void ClearAndUnregisterEnemies()
         {
+            
             foreach (var enemy in _enemies)
             {
                 enemy.GetComponent<EnemyDeath>().Die();
-                UnRegisterEnemy(enemy);
             }
+
+            _enemies.Clear();
         }
 
 

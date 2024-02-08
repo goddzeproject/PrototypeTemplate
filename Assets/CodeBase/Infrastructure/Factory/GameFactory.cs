@@ -77,6 +77,7 @@ namespace CodeBase.Infrastructure.Factory
         public GameObject CreateHero(GameObject at)
         {
             GameObject hero = InstantiateRegistered(AssetPath.HeroPath, at.transform.position);
+            _ilevelWatcher.RegisterHero(hero);
             HeroGameObject = hero;
             return HeroGameObject;
         }
@@ -125,6 +126,7 @@ namespace CodeBase.Infrastructure.Factory
             health.Current = enemyData.Hp;
             health.Max = enemyData.Hp;
 
+            
             enemy.GetComponent<ActorUI>().Construct(health);
             enemy.GetComponent<AgentMoveToPlayer>()?.Construct(HeroGameObject.transform);
             enemy.GetComponent<NavMeshAgent>().speed = enemyData.MoveSpeed;

@@ -1,17 +1,16 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using CodeBase.Logic.EnemySpawners;
+using UnityEngine;
 
 namespace CodeBase.Infrastructure.Services.Levels
 {
     public interface ILevelService : IService
     {
-        public GameObject HeroGameObject { get; set; }
         void InitLevelData();
 
         void InitSpawners(int levelKey);
 
         void SpawnEnemies();
-        
-        void InitUIRoot();
 
         GameObject InitArena();
 
@@ -24,7 +23,10 @@ namespace CodeBase.Infrastructure.Services.Levels
 
         void InformProgressReaders();
 
-
-        void CleanUpLevelData();
+        void ClearSpawners();
+        void ClearHero();
+        void ClearEnemies();
+        
+        
     }
 }

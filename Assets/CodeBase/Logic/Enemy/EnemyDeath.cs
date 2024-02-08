@@ -35,8 +35,8 @@ namespace CodeBase.Logic.Enemy
             Health.HealthChanged -= HealthChanged;
             Animator.PlayDeath();
             
-            var VFX = SpawnDeathFx();
-            StartCoroutine(DestroyTimer(VFX));
+            //var VFX = SpawnDeathFx();
+            //StartCoroutine(DestroyTimer(VFX));
             
             Happened?.Invoke();
         }
@@ -49,9 +49,9 @@ namespace CodeBase.Logic.Enemy
 
         private IEnumerator DestroyTimer(GameObject VFX)
         {
-            yield return new WaitForSeconds(3);
-            Destroy(gameObject);
+            yield return new WaitForSeconds(1);
             Destroy(VFX);
+            Destroy(gameObject);
         }
     }
 }

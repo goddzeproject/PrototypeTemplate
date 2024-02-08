@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections;
+using CodeBase.Infrastructure.Services.Levels;
 using UnityEngine;
 
 namespace CodeBase.Logic.Enemy
 {
-    public class EnemyHide : MonoBehaviour
+    public class EnemyGone : MonoBehaviour
     {
         public TriggerObserver _TriggerObserver;
-        public float TimeDestroy = 3f;
+        public bool isGone;
 
         private void Start()
         {
@@ -16,15 +17,8 @@ namespace CodeBase.Logic.Enemy
 
         private void TriggerExit(Collider obj)
         {
-            if(obj.CompareTag("Enemy"))
-                StartCoroutine(DestroyObject());    
-        }
-
-        private IEnumerator DestroyObject()
-        {
-            yield return new WaitForSeconds(TimeDestroy);
-
-            Destroy(gameObject);
+            if (obj.CompareTag("Enemy"))
+                isGone = true;
         }
     }
 }

@@ -23,8 +23,7 @@ namespace CodeBase.Infrastructure.Services.Levels
 
         private List<SpawnPoint> _spawnPoints = new List<SpawnPoint>();
         private List<GameObject> _enemies = new List<GameObject>();
-        
-        public GameObject HeroGameObject { get; set; }
+        private GameObject HeroGameObject { set; get; }
 
         public LevelService(IGameFactory gameFactory, IStaticDataService staticDataService,
             IPersistentProgressService progressService)
@@ -37,7 +36,6 @@ namespace CodeBase.Infrastructure.Services.Levels
 
         public void InitLevelData()
         {
-            CleanUpLevelData();
             InitSpawners(InitialLevel);
         }
 
@@ -45,7 +43,7 @@ namespace CodeBase.Infrastructure.Services.Levels
         {
             var hero = _gameFactory.CreateHero(GameObject.FindWithTag(InitialPointTag));
             HeroGameObject = hero;
-            return hero;
+            return HeroGameObject;
         }
 
         public void InitSpawners(int levelKey)
@@ -64,12 +62,11 @@ namespace CodeBase.Infrastructure.Services.Levels
 
         public void SpawnEnemies()
         {
-            foreach (var spawnPoint in _spawnPoints) 
+            foreach (var spawnPoint in _spawnPoints)
+            {
                 spawnPoint.Spawn();
-        }
-
-        public void InitUIRoot()
-        {
+            }
+                
         }
 
         public GameObject InitArena() =>
@@ -96,28 +93,33 @@ namespace CodeBase.Infrastructure.Services.Levels
                 progressReader.LoadProgress(_progressService.Progress);
         }
 
-
-        public void CleanUpLevelData()
-        {
-            ClearSpawners();
-            
-            ClearHero();
-        }
-
-        private void ClearHero()
+        public void ClearHero()
         {
             if (HeroGameObject != null)
                 HeroGameObject.GetComponent<HeroDeath>().DestroyHero();
         }
 
-        private void ClearSpawners()
+        public void ClearSpawners()
         {
             foreach (var spawnPoint in _spawnPoints)
             {
                 if (spawnPoint != null)
                     spawnPoint.DestroySpawner();
             }
+
             _spawnPoints.Clear();
         }
+
+        public void ClearEnemies()
+        {
+            foreach (var enemy in _enemies)
+            {
+                if (enemy != null)
+                    enemy.GetComponent<EnemyDeath>().Die();
+            }
+            _enemies.Clear();
+        }
+        
+        
     }
 }

@@ -44,5 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5db53e4015b04748896c60542cffa7c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MonsterTypeId: 0
+  enemyTypeId: 0
   _slain: 0
+  SpawnPosition: {fileID: 0}
+  unitsToSpawn: 0
+  SpawnCooldown: 0

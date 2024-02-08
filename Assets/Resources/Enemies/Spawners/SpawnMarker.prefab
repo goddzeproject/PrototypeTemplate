@@ -45,7 +45,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f109412877494ea8b767f030698538a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MonsterTypeId: 0
+  enemyTypeId: 0
+  SpawnPosition: {fileID: 4456854836619406254}
+  unitsToSpawn: 0
+  SpawnCooldown: 0
 --- !u!114 &7840381902459950304
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58,4 +61,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfb9bba383c24274ba5d6b373cf5defc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Id: Main_da7bb927-f72e-484b-87f8-86dfb0194fb1
+  Id: SpawnMarker_a587a922-ffeb-4c19-b431-3281d9e38af4
