@@ -97,6 +97,8 @@ namespace CodeBase.Infrastructure.Factory
 
             hud.GetComponentInChildren<LootCounter>()
                 .Construct(_proggressService.Progress.WorldData);
+            
+            hud.GetComponentInChildren<LevelCounter>().Construct(_ilevelWatcher);
 
             foreach (OpenWindowButton openWindowButton in hud.GetComponentsInChildren<OpenWindowButton>())
                 openWindowButton.Construct(_windowService);
@@ -131,7 +133,8 @@ namespace CodeBase.Infrastructure.Factory
             enemy.GetComponent<SimpleMovement>()?.Construct(direction);
             enemy.GetComponent<ActorUI>().Construct(health);
             enemy.GetComponent<AgentMoveToPlayer>()?.Construct(HeroGameObject.transform);
-            enemy.GetComponent<NavMeshAgent>().speed = enemyData.MoveSpeed;
+            enemy.GetComponent<SimpleMovement>().Speed = enemyData.MoveSpeed;
+            //enemy.GetComponent<NavMeshAgent>().speed = enemyData.MoveSpeed;
 
             // var lootSpawners = monster.GetComponentInChildren<LootSpawner>();
             // lootSpawners.Construct(this, _randomService);

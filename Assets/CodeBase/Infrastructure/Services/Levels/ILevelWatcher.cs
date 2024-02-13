@@ -6,6 +6,7 @@ namespace CodeBase.Infrastructure.Services.Levels
 {
     public interface ILevelWatcher : IService
     {
+        GameObject HeroGameObject { get; set; }
         int ReturnCurrentLevel();
         void RestartLevel(int levelKey);
         void StartWatching();

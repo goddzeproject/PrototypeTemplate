@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 093a0cf2164b4adebaca588644c13973, type: 3}
   m_Name: Lich
   m_EditorClassIdentifier: 
-  MonsterTypeId: 0
+  enemyTypeId: 0
   Hp: 6
   Damage: 30
   MinLoot: 2
   MaxLoot: 5
   EffectiveDistance: 0.664
   Cleavage: 0.789
-  MoveSpeed: 1
+  MoveSpeed: 2
   Prefab: {fileID: 3358874127660086885, guid: 03e36fb24ea41c04387dc79a7553f602, type: 3}

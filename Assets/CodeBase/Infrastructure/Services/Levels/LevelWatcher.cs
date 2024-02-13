@@ -25,7 +25,7 @@ namespace CodeBase.Infrastructure.Services.Levels
 
         public int LevelKey = 1;
 
-        public GameObject HeroGameObject;
+        public GameObject HeroGameObject { get; set; }
 
         private bool _isWindowOpen;
 
@@ -40,18 +40,18 @@ namespace CodeBase.Infrastructure.Services.Levels
             
         }
 
+        public void StartWatching()
+        {
+            _coroutineRunner.StartCoroutine(WatchUpdate());
+            _levelService = AllServices.Container.Single<ILevelService>(); // Это пока Костыль!!!
+        }
+
         public int ReturnCurrentLevel() => 
             LevelKey;
 
         public void RestartLevel(int levelKey)
         {
             LevelKey = levelKey;
-        }
-
-        public void StartWatching()
-        {
-            _coroutineRunner.StartCoroutine(WatchUpdate());
-            _levelService = AllServices.Container.Single<ILevelService>(); // Это пока Костыль!!!
         }
 
         private IEnumerator WatchUpdate()
@@ -98,6 +98,10 @@ namespace CodeBase.Infrastructure.Services.Levels
         private bool WatchHero() // проверка живой ли герой и вызов Окна при смерти
         {
             bool isDead = HeroGameObject.GetComponent<HeroDeath>().isDead;
+
+            if (HeroGameObject.GetComponent<HeroGone>().isGone)
+                isDead = true;
+            
             if (isDead && !_isWindowOpen)
             {
                 _coroutineRunner.StartCoroutine(StartTimerOpenRMenu());
@@ -119,7 +123,7 @@ namespace CodeBase.Infrastructure.Services.Levels
 
         private IEnumerator StartTimerOpenRMenu()
         {
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(1f);
             OpenRMenu();
         }
 

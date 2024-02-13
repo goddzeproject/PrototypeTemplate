@@ -31,6 +31,7 @@ namespace CodeBase.UI.Elements
 
         private void Restart()
         {
+            _levelWatcher.HeroGameObject.transform.position = Vector3.zero;
             _levelWatcher.RestartLevel(1);
             _levelWatcher.ChangeLevel(1);
             Destroy(gameObject);
