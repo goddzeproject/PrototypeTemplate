@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.Infrastructure.Services;
+using CodeBase.Infrastructure.Services.Holder;
 using CodeBase.Infrastructure.Services.Levels;
 using CodeBase.Infrastructure.Services.PersistentProgress;
 using CodeBase.Infrastructure.Services.Randomizer;
@@ -28,8 +29,7 @@ namespace CodeBase.Infrastructure.Factory
         private readonly IRandomService _randomService;
         private readonly IPersistentProgressService _proggressService;
         private readonly IWindowService _windowService;
-        private readonly ILevelWatcher _ilevelWatcher;
-        private IGameFactory _gameFactoryImplementation;
+        private readonly IObjectHolder _objectHolder;
 
         public List<ISavedProgressReader> ProgressReaders { get; } = new List<ISavedProgressReader>();
         public List<ISavedProgress> ProgressWriters { get; } = new List<ISavedProgress>();
@@ -38,14 +38,14 @@ namespace CodeBase.Infrastructure.Factory
         private GameObject VirtualCamera { get; set; }
 
         public GameFactory(IAssets assets, IStaticDataService staticData, IRandomService random,
-            IPersistentProgressService persistentProgressService, IWindowService windowService, ILevelWatcher ilevelWatcher)
+            IPersistentProgressService persistentProgressService, IWindowService windowService, IObjectHolder objectHolder)
         {
             _assets = assets;
             _staticData = staticData;
             _randomService = random;
             _proggressService = persistentProgressService;
             _windowService = windowService;
-            _ilevelWatcher = ilevelWatcher;
+            _objectHolder = objectHolder;
         }
 
         public void Register(ISavedProgressReader progressReader)
@@ -78,7 +78,7 @@ namespace CodeBase.Infrastructure.Factory
         public GameObject CreateHero(GameObject at)
         {
             GameObject hero = InstantiateRegistered(AssetPath.HeroPath, at.transform.position);
-            _ilevelWatcher.RegisterHero(hero);
+            _objectHolder.RegisterHero(hero);
             HeroGameObject = hero;
             return HeroGameObject;
         }
@@ -94,11 +94,11 @@ namespace CodeBase.Infrastructure.Factory
         public GameObject CreateHud()
         {
             GameObject hud = InstantiateRegistered(AssetPath.HudPath);
-
+            
             hud.GetComponentInChildren<LootCounter>()
                 .Construct(_proggressService.Progress.WorldData);
+            //hud.GetComponentInChildren<LevelCounter>().Construct(_objectHolder);
             
-            hud.GetComponentInChildren<LevelCounter>().Construct(_ilevelWatcher);
 
             foreach (OpenWindowButton openWindowButton in hud.GetComponentsInChildren<OpenWindowButton>())
                 openWindowButton.Construct(_windowService);
@@ -109,8 +109,8 @@ namespace CodeBase.Infrastructure.Factory
         public SpawnPoint CreateSpawner(Vector3 at, string spawnerId, EnemyTypeId enemyTypeId, Vector3 spawnDirection, int unitsToSpawn, float spawnCooldown, float firstDelay)
         {
             SpawnPoint spawner = InstantiateRegistered(AssetPath.Spawner, at).GetComponent<SpawnPoint>();
-
-            spawner.Construct(this, _ilevelWatcher);
+            
+            spawner.Construct(this, _objectHolder);
             spawner.Id = spawnerId;
             spawner.enemyTypeId = enemyTypeId;
             spawner.SpawnDirection = spawnDirection;
@@ -124,8 +124,7 @@ namespace CodeBase.Infrastructure.Factory
         {
             EnemyStaticData enemyData = _staticData.ForEnemy(typeId);
             GameObject enemy = Object.Instantiate(enemyData.Prefab, parent.position, Quaternion.identity, parent);
-
-
+            
             var health = enemy.GetComponent<IHealth>();
             health.Current = enemyData.Hp;
             health.Max = enemyData.Hp;

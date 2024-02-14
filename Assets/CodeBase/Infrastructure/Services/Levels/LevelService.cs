@@ -1,14 +1,12 @@
-﻿using System.Collections.Generic;
-using CodeBase.CameraLogic;
-using CodeBase.Data;
+﻿using CodeBase.CameraLogic;
 using CodeBase.Infrastructure.Factory;
+using CodeBase.Infrastructure.Services.Holder;
 using CodeBase.Infrastructure.Services.PersistentProgress;
 using CodeBase.Infrastructure.Services.StaticData;
 using CodeBase.Logic.Enemy;
 using CodeBase.Logic.EnemySpawners;
 using CodeBase.Logic.Hero;
 using CodeBase.StaticData;
-using CodeBase.UI.Elements;
 using UnityEngine;
 
 namespace CodeBase.Infrastructure.Services.Levels
@@ -21,18 +19,17 @@ namespace CodeBase.Infrastructure.Services.Levels
         private readonly IStaticDataService _staticDataService;
         private readonly IGameFactory _gameFactory;
         private readonly IPersistentProgressService _progressService;
-
-        private List<SpawnPoint> _spawnPoints = new List<SpawnPoint>();
-        private List<GameObject> _enemies = new List<GameObject>();
-        private GameObject HeroGameObject { set; get; }
-        private GameObject Hud { set; get; }
+        private readonly IObjectHolder _objectHolder;
+        public GameObject HeroGameObject { set; get; }
+        public GameObject Hud { set; get; }
 
         public LevelService(IGameFactory gameFactory, IStaticDataService staticDataService,
-            IPersistentProgressService progressService)
+            IPersistentProgressService progressService, IObjectHolder objectHolder)
         {
             _gameFactory = gameFactory;
             _staticDataService = staticDataService;
             _progressService = progressService;
+            _objectHolder = objectHolder;
         }
 
 
@@ -61,13 +58,13 @@ namespace CodeBase.Infrastructure.Services.Levels
                     spawnerData.SpawnCooldown, 
                     spawnerData.FirstDelay);
 
-                _spawnPoints.Add(spawnPoint);
+                _objectHolder.SpawnPoints.Add(spawnPoint);
             }
         }
 
         public void SpawnEnemies()
         {
-            foreach (var spawnPoint in _spawnPoints)
+            foreach (var spawnPoint in _objectHolder.SpawnPoints)
             {
                 spawnPoint.Spawn();
             }
@@ -92,6 +89,11 @@ namespace CodeBase.Infrastructure.Services.Levels
                 Camera.main.GetComponent<CameraFollow>().FollowToObject(vCamera, _object);
         }
 
+        public void UpdateHud()
+        {
+            //feture logic of update level count and etc...
+        }
+
         public void InformProgressReaders()
         {
             _progressService.Progress.HeroState.ResetHP();
@@ -110,31 +112,27 @@ namespace CodeBase.Infrastructure.Services.Levels
                 HeroGameObject.GetComponent<HeroDeath>().DestroyHero();
         }
 
-        public void UpdateHud()
-        {
-            //feture logic of update level count and etc...
-        }
-
         public void ClearSpawners()
         {
-            foreach (var spawnPoint in _spawnPoints)
+            foreach (var spawnPoint in _objectHolder.SpawnPoints)
             {
                 if (spawnPoint != null)
                     spawnPoint.DestroySpawner();
             }
-
-            _spawnPoints.Clear();
+            
+            _objectHolder.SpawnPoints.Clear();
+            //_spawnPoints.Clear();
         }
 
         public void ClearEnemies()
         {
-            foreach (var enemy in _enemies)
+            foreach (var enemy in _objectHolder.Enemies)
             {
                 if (enemy != null)
                     enemy.GetComponent<EnemyDeath>().Die();
             }
 
-            _enemies.Clear();
+            _objectHolder.SpawnPoints.Clear();
         }
     }
 }

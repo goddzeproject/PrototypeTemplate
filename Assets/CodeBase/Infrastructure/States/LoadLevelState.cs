@@ -79,19 +79,17 @@ namespace CodeBase.Infrastructure.States
             _levelWatcher.StartWatching();
         }
 
-        private void SpawnEnemy()
-        {
-            _levelService.SpawnEnemies();
-        }
+        private void InitSpawners() => 
+            _levelService.InitLevelData();
 
         private GameObject InitArena() => 
             _levelService.InitArena();
 
-        private void InitSpawners() => 
-            _levelService.InitLevelData();
-
         private GameObject InitHero() => 
             _levelService.InitHero();
+
+        private void SpawnEnemy() => 
+            _levelService.SpawnEnemies();
 
         private void InitHud(GameObject hero) => 
             _levelService.InitHud(hero);

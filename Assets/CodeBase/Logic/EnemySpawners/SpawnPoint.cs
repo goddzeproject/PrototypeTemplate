@@ -2,6 +2,7 @@
 using System.Collections;
 using CodeBase.Data;
 using CodeBase.Infrastructure.Factory;
+using CodeBase.Infrastructure.Services.Holder;
 using CodeBase.Infrastructure.Services.Levels;
 using CodeBase.Infrastructure.Services.PersistentProgress;
 using CodeBase.Logic.Enemy;
@@ -26,18 +27,13 @@ namespace CodeBase.Logic.EnemySpawners
 
         private EnemyDeath _enemyDeath;
         private IGameFactory _gameFactory;
-        private ILevelWatcher _levelWatcher;
+        private IObjectHolder _objectHolder;
         private bool _isFirstSpawn;
 
-        public void Construct(IGameFactory gameFactory, ILevelWatcher iLevelWatcher)
+        public void Construct(IGameFactory gameFactory, IObjectHolder objectHolder)
         {
             _gameFactory = gameFactory;
-            _levelWatcher = iLevelWatcher;
-        }
-
-        private void Start()
-        {
-            _levelWatcher.RegisterSpawner(this);
+            _objectHolder = objectHolder;
         }
 
 
@@ -57,7 +53,7 @@ namespace CodeBase.Logic.EnemySpawners
                 }
                 
                 GameObject enemy = _gameFactory.CreateEnemy(enemyTypeId, transform, SpawnDirection);
-                _levelWatcher.RegisterEnemy(enemy);
+                _objectHolder.RegisterEnemy(enemy);
                 UnitsToSpawn--;
                 yield return new WaitForSeconds(SpawnCooldown);
             }
@@ -73,7 +69,7 @@ namespace CodeBase.Logic.EnemySpawners
 
         public void DestroySpawner()
         {
-            _levelWatcher.UnRegisterSpawner(this);
+            _objectHolder.UnRegisterSpawner(this);
             Destroy(gameObject);
         }
     }
