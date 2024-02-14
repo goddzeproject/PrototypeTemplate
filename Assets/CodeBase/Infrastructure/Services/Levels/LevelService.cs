@@ -57,8 +57,8 @@ namespace CodeBase.Infrastructure.Services.Levels
                     spawnerData.AmountEnemies, 
                     spawnerData.SpawnCooldown, 
                     spawnerData.FirstDelay);
-
-                _objectHolder.SpawnPoints.Add(spawnPoint);
+                
+                _objectHolder.RegisterSpawner(spawnPoint);
             }
         }
 
