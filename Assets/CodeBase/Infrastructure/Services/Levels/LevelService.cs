@@ -121,7 +121,6 @@ namespace CodeBase.Infrastructure.Services.Levels
             }
             
             _objectHolder.SpawnPoints.Clear();
-            //_spawnPoints.Clear();
         }
 
         public void ClearEnemies()
@@ -132,7 +131,7 @@ namespace CodeBase.Infrastructure.Services.Levels
                     enemy.GetComponent<EnemyDeath>().Die();
             }
 
-            _objectHolder.SpawnPoints.Clear();
+            _objectHolder.Enemies.Clear();
         }
     }
 }

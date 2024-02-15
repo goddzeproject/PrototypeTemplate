@@ -6,12 +6,6 @@ namespace CodeBase.Infrastructure.Services.Holder
 {
     class ObjectHolder : IObjectHolder
     {
-        // public ObjectHolder(List<SpawnPoint> spawnPoints, List<GameObject> enemies)
-        // {
-        //     SpawnPoints = spawnPoints;
-        //     Enemies = enemies;
-        // }
-
         public GameObject HeroGameObject { get; set; }
         public List<SpawnPoint> SpawnPoints { get; set; } = new List<SpawnPoint>();
         public List<GameObject> Enemies { get; set; } = new List<GameObject>();
@@ -28,12 +22,6 @@ namespace CodeBase.Infrastructure.Services.Holder
         public void RegisterEnemy(GameObject enemy)
         {
             Enemies.Add(enemy);
-        }
-
-        public void UnRegisterSpawner(SpawnPoint spawnPoint)
-        {
-            if (SpawnPoints.Contains(spawnPoint))
-                SpawnPoints.Remove(spawnPoint);
         }
         
     }

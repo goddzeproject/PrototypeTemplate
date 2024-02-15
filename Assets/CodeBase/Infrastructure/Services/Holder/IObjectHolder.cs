@@ -14,6 +14,5 @@ namespace CodeBase.Infrastructure.Services.Holder
         void RegisterHero(GameObject hero);
         void RegisterSpawner(SpawnPoint spawnPoint);
         void RegisterEnemy(GameObject enemy);
-        void UnRegisterSpawner(SpawnPoint spawnPoint);
     }
 }
