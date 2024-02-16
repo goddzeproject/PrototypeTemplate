@@ -60,7 +60,10 @@ namespace CodeBase.Infrastructure.States
             _services.RegisterSingle<IObjectHolder>( new ObjectHolder());
 
 
-            _services.RegisterSingle<IUIFactory>(new UIFactory(_services.Single<IAssets>(), _services.Single<IStaticDataService>(), _services.Single<IPersistentProgressService>()));
+            _services.RegisterSingle<IUIFactory>(new UIFactory(_services.Single<IAssets>(), 
+                _services.Single<IStaticDataService>(), 
+                _services.Single<IPersistentProgressService>()));
+            
             _services.RegisterSingle<IWindowService>(new WindowService(_services.Single<IUIFactory>()));
 
             _services.RegisterSingle<IGameFactory>(new GameFactory(
@@ -76,12 +79,12 @@ namespace CodeBase.Infrastructure.States
                 _services.Single<IGameFactory>(),
                 _services.Single<IStaticDataService>(), 
                 _services.Single<IPersistentProgressService>(), 
-                _services.Single<IObjectHolder>()));
+                _services.Single<IObjectHolder>(), 
+                _services.Single<IWindowService>()));
             
             _services.RegisterSingle<ILevelWatcher>(new LevelWatcher(
                 _services.Single<ILevelService>(), 
-                _services.Single<IStaticDataService>(), 
-                _services.Single<IWindowService>(),
+                _services.Single<IStaticDataService>(),
                 _services.Single<ICoroutineRunner>(),
                 _services.Single<IObjectHolder>()));
 

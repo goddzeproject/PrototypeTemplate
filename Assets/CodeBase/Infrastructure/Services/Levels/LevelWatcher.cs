@@ -14,7 +14,6 @@ namespace CodeBase.Infrastructure.Services.Levels
     {
         private ILevelService _levelService;
         private readonly IStaticDataService _staticData;
-        private readonly IWindowService _windowService;
         private readonly ICoroutineRunner _coroutineRunner;
         private readonly IObjectHolder _objectHolder;
 
@@ -24,12 +23,11 @@ namespace CodeBase.Infrastructure.Services.Levels
         private bool _isWindowOpen;
 
 
-        public LevelWatcher(ILevelService levelService, IStaticDataService staticData, IWindowService windowService,
+        public LevelWatcher(ILevelService levelService, IStaticDataService staticData,
             ICoroutineRunner coroutineRunner, IObjectHolder objectHolder)
         {
             _levelService = levelService;
             _staticData = staticData;
-            _windowService = windowService;
             _coroutineRunner = coroutineRunner;
             _objectHolder = objectHolder;
         }
@@ -95,7 +93,6 @@ namespace CodeBase.Infrastructure.Services.Levels
             if (isDead && !_isWindowOpen)
             {
                 _coroutineRunner.StartCoroutine(StartTimerOpenRMenu());
-                _isWindowOpen = true;
             }
 
             return isDead;
@@ -114,11 +111,9 @@ namespace CodeBase.Infrastructure.Services.Levels
         private IEnumerator StartTimerOpenRMenu()
         {
             yield return new WaitForSeconds(1f);
-            OpenRMenu();
+            _levelService.OpenRestartWindow();
+            _isWindowOpen = true;
         }
         
-
-        private void OpenRMenu() =>
-            _windowService.Open(WindowId.RestartMenu);
     }
 }

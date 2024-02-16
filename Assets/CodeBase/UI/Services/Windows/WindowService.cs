@@ -18,6 +18,9 @@ namespace CodeBase.UI.Services.Windows
             {
                 case WindowId.Unknown:
                     break;
+                case WindowId.MainMenu:
+                    _uiFactory.CreateMainMenu();
+                    break;
                 case WindowId.Shop:
                     _uiFactory.CreateShop();
                     break;

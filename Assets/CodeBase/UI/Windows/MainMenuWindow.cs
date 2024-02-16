@@ -1,18 +1,11 @@
-﻿using CodeBase.Infrastructure.Services;
-using CodeBase.Infrastructure.Services.Levels;
-using TMPro;
-using UnityEngine.Serialization;
-
-namespace CodeBase.UI.Windows
+﻿namespace CodeBase.UI.Windows
 {
-    public class RestartWindow : WindowBase
+    public class MainMenuWindow : WindowBase
     {
-        public TextMeshProUGUI levelText;
-        private ILevelWatcher _levelWatcher;
-        
         protected override void Initialize()
         {
-            DoSomething();
+            //_levelWatcher = AllServices.Container.Single<ILevelWatcher>();
+            RefreshLevelText();
         }
 
         /*protected override void SubscribeUpdates() =>
@@ -24,7 +17,7 @@ namespace CodeBase.UI.Windows
             Progress.WorldData.LootData.Changed -= RefreshLevelText;
         }*/
 
-        private void DoSomething()
+        private void RefreshLevelText()
         {
         }
     }

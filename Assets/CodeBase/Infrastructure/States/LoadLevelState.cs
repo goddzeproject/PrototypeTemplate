@@ -70,14 +70,21 @@ namespace CodeBase.Infrastructure.States
             GameObject arena = InitArena();
             GameObject hero = InitHero();
             
-            SpawnEnemy();
+            //SpawnEnemy(); // Crutch
 
             InitHud(hero);
             GameObject vCamera = InitVirtualCamera();
             CameraFollow(vCamera, arena);
-
-            _levelWatcher.StartWatching();
+            
+            InitMainMenu();
+            StartWatching();
         }
+
+        private void StartWatching() => 
+            _levelWatcher.StartWatching();
+
+        private void InitMainMenu() => 
+            _levelService.OpenMainMenuWindow();
 
         private void InitSpawners() => 
             _levelService.InitLevelData();

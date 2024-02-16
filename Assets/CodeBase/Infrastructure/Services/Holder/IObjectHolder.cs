@@ -9,7 +9,6 @@ namespace CodeBase.Infrastructure.Services.Holder
     {
         GameObject HeroGameObject { get; set; }
         List<SpawnPoint> SpawnPoints { get; set; }
-
         List<GameObject> Enemies { get; set; }
         void RegisterHero(GameObject hero);
         void RegisterSpawner(SpawnPoint spawnPoint);

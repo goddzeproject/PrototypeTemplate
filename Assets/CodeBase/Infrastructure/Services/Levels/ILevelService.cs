@@ -27,5 +27,8 @@ namespace CodeBase.Infrastructure.Services.Levels
         void ClearEnemies();
         void InformProgressReaders();
         void ClenUpProgressReaders();
+
+        void OpenRestartWindow();
+        void OpenMainMenuWindow();
     }
 }

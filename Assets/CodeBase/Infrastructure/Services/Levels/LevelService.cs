@@ -8,6 +8,7 @@ using CodeBase.Logic.EnemySpawners;
 using CodeBase.Logic.Hero;
 using CodeBase.StaticData;
 using CodeBase.UI.Elements;
+using CodeBase.UI.Services.Windows;
 using UnityEngine;
 
 namespace CodeBase.Infrastructure.Services.Levels
@@ -21,16 +22,18 @@ namespace CodeBase.Infrastructure.Services.Levels
         private readonly IGameFactory _gameFactory;
         private readonly IPersistentProgressService _progressService;
         private readonly IObjectHolder _objectHolder;
+        private readonly IWindowService _windowService;
         public GameObject HeroGameObject { set; get; }
         public GameObject Hud { set; get; }
 
         public LevelService(IGameFactory gameFactory, IStaticDataService staticDataService,
-            IPersistentProgressService progressService, IObjectHolder objectHolder)
+            IPersistentProgressService progressService, IObjectHolder objectHolder, IWindowService windowService)
         {
             _gameFactory = gameFactory;
             _staticDataService = staticDataService;
             _progressService = progressService;
             _objectHolder = objectHolder;
+            _windowService = windowService;
         }
 
 
@@ -136,6 +139,16 @@ namespace CodeBase.Infrastructure.Services.Levels
             }
 
             _objectHolder.Enemies.Clear();
+        }
+
+        public void OpenMainMenuWindow()
+        {
+            _windowService.Open(WindowId.MainMenu);
+        }
+
+        public void OpenRestartWindow()
+        {
+            _windowService.Open(WindowId.RestartMenu);
         }
     }
 }

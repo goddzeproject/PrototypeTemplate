@@ -1,5 +1,6 @@
 ﻿using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.Infrastructure.Services;
+using CodeBase.Infrastructure.Services.Holder;
 using CodeBase.Infrastructure.Services.PersistentProgress;
 using CodeBase.Infrastructure.Services.StaticData;
 using CodeBase.StaticData.Windows;
@@ -17,6 +18,7 @@ namespace CodeBase.UI.Services.Factory
         private readonly IPersistentProgressService _progressService;
 
         private Transform _uiRoot;
+
         public UIFactory(IAssets assets, IStaticDataService staticData, IPersistentProgressService progressService)
         {
             _assets = assets;
@@ -27,18 +29,25 @@ namespace CodeBase.UI.Services.Factory
         public void CreateShop()
         {
             WindowConfig config = _staticData.ForWindow(WindowId.Shop);
-            WindowBase window= Object.Instantiate(config.Prefab, _uiRoot);
+            WindowBase window = Object.Instantiate(config.Prefab, _uiRoot);
+            window.Construct(_progressService);
+        }
+
+        public void CreateMainMenu()
+        {
+            WindowConfig config = _staticData.ForWindow(WindowId.MainMenu);
+            WindowBase window = Object.Instantiate(config.Prefab, _uiRoot);
             window.Construct(_progressService);
         }
 
         public void CreateRestartMenu()
         {
             WindowConfig config = _staticData.ForWindow(WindowId.RestartMenu);
-            WindowBase window= Object.Instantiate(config.Prefab, _uiRoot);
+            WindowBase window = Object.Instantiate(config.Prefab, _uiRoot);
             window.Construct(_progressService);
         }
 
-        public void CreateUIRoot() => 
+        public void CreateUIRoot() =>
             _uiRoot = _assets.Initialize(UIRootPath).transform;
     }
 }
