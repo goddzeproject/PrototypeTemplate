@@ -4,6 +4,7 @@ using CodeBase.Infrastructure.Services.Holder;
 using CodeBase.Infrastructure.Services.StaticData;
 using CodeBase.Logic.Enemy;
 using CodeBase.Logic.Hero;
+using CodeBase.UI.Elements;
 using CodeBase.UI.Services.Windows;
 using UnityEngine;
 
@@ -72,7 +73,8 @@ namespace CodeBase.Infrastructure.Services.Levels
             {
                 _levelService.ClearHero();
                 GameObject hero = _levelService.InitHero();
-                //_levelService.InitHud(hero);
+                _levelService.InformProgressReaders();
+                _levelService.Hud.GetComponent<ActorUI>().Construct(hero.GetComponent<HeroHealth>());
             }
 
             _levelService.InitSpawners(levelKey);

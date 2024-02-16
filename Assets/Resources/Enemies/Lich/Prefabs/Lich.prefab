@@ -986,7 +986,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _TriggerObserver: {fileID: 7916037764503569954}
-  TimeDestroy: 3
+  isGone: 0
 --- !u!114 &3660313398978617662
 MonoBehaviour:
   m_ObjectHideFlags: 0

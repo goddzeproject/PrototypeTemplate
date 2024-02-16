@@ -7,6 +7,7 @@ using CodeBase.Logic.Enemy;
 using CodeBase.Logic.EnemySpawners;
 using CodeBase.Logic.Hero;
 using CodeBase.StaticData;
+using CodeBase.UI.Elements;
 using UnityEngine;
 
 namespace CodeBase.Infrastructure.Services.Levels
@@ -51,7 +52,9 @@ namespace CodeBase.Infrastructure.Services.Levels
 
             foreach (EnemySpawnerData spawnerData in levelData.EnemySpawners)
             {
-                SpawnPoint spawnPoint = _gameFactory.CreateSpawner(spawnerData.Position, spawnerData.Id,
+                SpawnPoint spawnPoint = _gameFactory.CreateSpawner(
+                    spawnerData.Position, 
+                    spawnerData.Id,
                     spawnerData.enemyTypeId,
                     spawnerData.SpawnDirection, 
                     spawnerData.AmountEnemies, 
@@ -76,8 +79,9 @@ namespace CodeBase.Infrastructure.Services.Levels
         public GameObject InitHud(GameObject hero)
         {
             GameObject hud = _gameFactory.CreateHud();
-            //hud.GetComponentInChildren<ActorUI>().Construct(hero.GetComponent<HeroHealth>());
-            return hud;
+            hud.GetComponent<ActorUI>().Construct(hero.GetComponent<HeroHealth>());
+            Hud = hud;
+            return Hud;
         }
 
         public GameObject InitVirtualCamera() =>

@@ -95,8 +95,7 @@ namespace CodeBase.Infrastructure.Factory
         {
             GameObject hud = InstantiateRegistered(AssetPath.HudPath);
             
-            hud.GetComponentInChildren<LootCounter>()
-                .Construct(_proggressService.Progress.WorldData);
+            //hud.GetComponentInChildren<LootCounter>().Construct(_proggressService.Progress.WorldData);
             //hud.GetComponentInChildren<LevelCounter>().Construct(_objectHolder);
             
 
@@ -130,9 +129,9 @@ namespace CodeBase.Infrastructure.Factory
             health.Max = enemyData.Hp;
 
             enemy.GetComponent<SimpleMovement>()?.Construct(direction);
-            enemy.GetComponent<ActorUI>().Construct(health);
             enemy.GetComponent<AgentMoveToPlayer>()?.Construct(HeroGameObject.transform);
             enemy.GetComponent<SimpleMovement>().Speed = enemyData.MoveSpeed;
+            enemy.GetComponent<ActorUI>().Construct(health);
             //enemy.GetComponent<NavMeshAgent>().speed = enemyData.MoveSpeed;
 
             // var lootSpawners = monster.GetComponentInChildren<LootSpawner>();

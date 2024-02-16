@@ -69,7 +69,6 @@ namespace CodeBase.Logic.EnemySpawners
 
         public void DestroySpawner()
         {
-            //_objectHolder.UnRegisterSpawner(this);
             Destroy(gameObject);
         }
     }
