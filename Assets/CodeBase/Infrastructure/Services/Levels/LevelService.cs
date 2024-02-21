@@ -148,7 +148,7 @@ namespace CodeBase.Infrastructure.Services.Levels
 
         public void OpenRestartWindow()
         {
-            _windowService.Open(WindowId.RestartMenu);
+            _windowService.Open(WindowId.PauseMenu);
         }
     }
 }

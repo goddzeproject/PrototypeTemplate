@@ -36,6 +36,10 @@ namespace CodeBase.UI.Elements
             _levelService.HeroGameObject.transform.position = Vector3.zero;
             _levelWatcher.RestartLevel(1);
             _levelWatcher.ChangeLevel(1);
+            
+            if(Time.timeScale == 0)
+                Time.timeScale = 1;
+            
             Destroy(gameObject);
         }
     }

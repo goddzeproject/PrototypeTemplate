@@ -6,22 +6,16 @@ namespace CodeBase.UI.Elements
     public class PauseButton : MonoBehaviour
     {
         public Button Button;
-        private bool isPaused = false;
 
         private void Awake() =>
-            Button.onClick.AddListener(Pause);
+            Button.onClick.AddListener(Resume);
 
-        private void Pause()
+        private void Resume()
         {
-            isPaused = !isPaused;
-
-            if (isPaused & Time.timeScale != 0)
-            {
-                Time.timeScale = 0;
-            }
-            else
+            if (Time.timeScale == 0)
             {
                 Time.timeScale = 1;
+                Destroy(gameObject);
             }
         }
     }

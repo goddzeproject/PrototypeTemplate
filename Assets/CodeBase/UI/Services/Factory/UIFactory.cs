@@ -40,9 +40,9 @@ namespace CodeBase.UI.Services.Factory
             window.Construct(_progressService);
         }
 
-        public void CreateRestartMenu()
+        public void CreatePauseMenu()
         {
-            WindowConfig config = _staticData.ForWindow(WindowId.RestartMenu);
+            WindowConfig config = _staticData.ForWindow(WindowId.PauseMenu);
             WindowBase window = Object.Instantiate(config.Prefab, _uiRoot);
             window.Construct(_progressService);
         }

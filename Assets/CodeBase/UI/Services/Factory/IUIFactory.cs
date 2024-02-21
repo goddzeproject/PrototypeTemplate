@@ -7,6 +7,6 @@ namespace CodeBase.UI.Services.Factory
         void CreateUIRoot();
         void CreateShop();
         void CreateMainMenu();
-        void CreateRestartMenu();
+        void CreatePauseMenu();
     }
 }
