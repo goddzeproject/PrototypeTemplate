@@ -1,8 +1,6 @@
-﻿using System;
-using CodeBase.Logic.Enemy.Behaviour;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace CodeBase.Logic.Enemy
+namespace CodeBase.Logic.Enemy.Behaviour
 {
     [RequireComponent(typeof(EnemyAnimator))]
     public class AnimateAlongMovement : MonoBehaviour

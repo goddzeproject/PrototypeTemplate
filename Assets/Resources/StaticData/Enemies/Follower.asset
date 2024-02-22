@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 093a0cf2164b4adebaca588644c13973, type: 3}
-  m_Name: Lich
+  m_Name: Follower
   m_EditorClassIdentifier: 
-  enemyTypeId: 0
-  Hp: 6
+  enemyTypeId: 3
+  Hp: 23
   Damage: 30
   MinLoot: 0
   MaxLoot: 0
-  EffectiveDistance: 0.664
-  Cleavage: 0.789
-  MoveSpeed: 2
-  Prefab: {fileID: 3358874127660086885, guid: 03e36fb24ea41c04387dc79a7553f602, type: 3}
+  EffectiveDistance: 0.666
+  Cleavage: 0.687
+  MoveSpeed: 3.79
+  Prefab: {fileID: 3358874127660086885, guid: 084b74127a2d8f848b67d33f55067ccb, type: 3}

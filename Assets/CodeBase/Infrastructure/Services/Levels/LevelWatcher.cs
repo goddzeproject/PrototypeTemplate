@@ -52,8 +52,11 @@ namespace CodeBase.Infrastructure.Services.Levels
                 Debug.Log("Update");
 
                 if (!WatchHero() & WatchSpawners() & WatchEnemies())
+                {
+                    yield return new WaitForSeconds(1f);
                     ChangeLevel(++LevelKey);
-
+                }
+                
                 yield return new WaitForSeconds(1f);
             }
         }
@@ -66,6 +69,9 @@ namespace CodeBase.Infrastructure.Services.Levels
             
             _levelService.ClearEnemies();
             _levelService.ClearSpawners();
+            _levelService.ClearPlanes();
+            _levelService.ClearWaves();
+            _levelService.ClearMines();
 
             if (WatchHero())
             {

@@ -9,20 +9,13 @@ namespace CodeBase.Logic.Enemy.Behaviour
         private Vector3 _direction;
 
 
-        public void Construct(Vector3 direction)
-        {
+        public void Construct(Vector3 direction) => 
             _direction = direction;
-        }
 
-        private void Start()
-        {
-            //transform.LookAt(transform.position + _direction);
+        private void Start() => 
             transform.rotation = Quaternion.LookRotation(_direction);
-        }
 
-        private void Update()
-        {
-            transform.Translate(_direction * Speed * Time.deltaTime, Space.World);
-        }
+        private void Update() => 
+            transform.Translate(_direction * (Speed * Time.deltaTime), Space.World);
     }
 }

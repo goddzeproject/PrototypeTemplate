@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.Infrastructure.Services;
 using CodeBase.Infrastructure.Services.Holder;
@@ -9,6 +10,7 @@ using CodeBase.Infrastructure.Services.StaticData;
 using CodeBase.Logic;
 using CodeBase.Logic.Enemy;
 using CodeBase.Logic.Enemy.Behaviour;
+using CodeBase.Logic.Enemy.BossBehaviour;
 using CodeBase.Logic.EnemySpawners;
 using CodeBase.Logic.Hero;
 using CodeBase.Logic.Loot;
@@ -127,10 +129,33 @@ namespace CodeBase.Infrastructure.Factory
             var health = enemy.GetComponent<IHealth>();
             health.Current = enemyData.Hp;
             health.Max = enemyData.Hp;
-
-            enemy.GetComponent<SimpleMovement>()?.Construct(direction);
+            
+            switch (enemyData.enemyTypeId)
+            {
+                case EnemyTypeId.Lich:
+                    enemy.GetComponent<SimpleMovement>()?.Construct(direction);
+                    enemy.GetComponent<SimpleMovement>().Speed = enemyData.MoveSpeed;        
+                    break;
+                case EnemyTypeId.Speedy:
+                    enemy.GetComponent<AccelerationMovement>()?.Construct(direction);
+                    break;
+                case EnemyTypeId.Snake:
+                    enemy.GetComponent<SnakeMovement>()?.Construct(direction);
+                    break;
+                case EnemyTypeId.Charger:
+                    enemy.GetComponent<ChargeMovement>()?.Construct(direction);
+                    break;
+                case EnemyTypeId.Follower:
+                    enemy.GetComponent<FollowMovement>()?.Construct(HeroGameObject.transform);
+                    break;
+                case EnemyTypeId.Boss:
+                    enemy.GetComponent<BossMovement>().Construct(direction);
+                    enemy.GetComponent<PlateSpawner>().Construct(this, enemy);
+                    enemy.GetComponent<BossBrain>().Construct(this, _randomService, _objectHolder, enemy, HeroGameObject.transform);
+                    break;
+            }
+            
             enemy.GetComponent<AgentMoveToPlayer>()?.Construct(HeroGameObject.transform);
-            enemy.GetComponent<SimpleMovement>().Speed = enemyData.MoveSpeed;
             enemy.GetComponent<ActorUI>().Construct(health);
             //enemy.GetComponent<NavMeshAgent>().speed = enemyData.MoveSpeed;
 
@@ -149,6 +174,14 @@ namespace CodeBase.Infrastructure.Factory
             enemy.GetComponent<SayFuckToHero>()?.Construct(HeroGameObject.transform);
 
             return enemy;
+        }
+
+
+        public GameObject CreatePlate(Vector3 at)
+        {
+            GameObject plate = InstantiateRegistered(AssetPath.Plate, at);
+            _objectHolder.RegisterPlate(plate);
+            return plate;
         }
 
         private GameObject InstantiateRegistered(string prefabPath, Vector3 at)

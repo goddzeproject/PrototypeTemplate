@@ -30,5 +30,8 @@ namespace CodeBase.Infrastructure.Services.Levels
 
         void OpenRestartWindow();
         void OpenMainMenuWindow();
+        void ClearPlanes();
+        void ClearWaves();
+        void ClearMines();
     }
 }

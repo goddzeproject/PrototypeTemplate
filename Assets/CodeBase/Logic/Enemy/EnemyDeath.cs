@@ -35,6 +35,8 @@ namespace CodeBase.Logic.Enemy
             Health.HealthChanged -= HealthChanged;
             Animator.PlayDeath();
             
+            GetComponent<EnemyGone>().isGone = true;
+            
             //var VFX = SpawnDeathFx();
             //StartCoroutine(DestroyTimer(VFX));
             

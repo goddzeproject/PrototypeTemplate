@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 093a0cf2164b4adebaca588644c13973, type: 3}
-  m_Name: Lich
+  m_Name: Charger
   m_EditorClassIdentifier: 
-  enemyTypeId: 0
-  Hp: 6
+  enemyTypeId: 4
+  Hp: 5
   Damage: 30
   MinLoot: 0
   MaxLoot: 0
-  EffectiveDistance: 0.664
-  Cleavage: 0.789
-  MoveSpeed: 2
-  Prefab: {fileID: 3358874127660086885, guid: 03e36fb24ea41c04387dc79a7553f602, type: 3}
+  EffectiveDistance: 0.666
+  Cleavage: 0.765
+  MoveSpeed: 4.51
+  Prefab: {fileID: 3358874127660086885, guid: 4d139d1c3f07cbe4d865d20cc7442880, type: 3}

@@ -4,6 +4,8 @@ using CodeBase.Infrastructure.Services.Holder;
 using CodeBase.Infrastructure.Services.PersistentProgress;
 using CodeBase.Infrastructure.Services.StaticData;
 using CodeBase.Logic.Enemy;
+using CodeBase.Logic.Enemy.BossBehaviour;
+using CodeBase.Logic.Enemy.BossBehaviour.Bullets;
 using CodeBase.Logic.EnemySpawners;
 using CodeBase.Logic.Hero;
 using CodeBase.StaticData;
@@ -56,14 +58,14 @@ namespace CodeBase.Infrastructure.Services.Levels
             foreach (EnemySpawnerData spawnerData in levelData.EnemySpawners)
             {
                 SpawnPoint spawnPoint = _gameFactory.CreateSpawner(
-                    spawnerData.Position, 
+                    spawnerData.Position,
                     spawnerData.Id,
                     spawnerData.enemyTypeId,
-                    spawnerData.SpawnDirection, 
-                    spawnerData.AmountEnemies, 
-                    spawnerData.SpawnCooldown, 
+                    spawnerData.SpawnDirection,
+                    spawnerData.AmountEnemies,
+                    spawnerData.SpawnCooldown,
                     spawnerData.FirstDelay);
-                
+
                 _objectHolder.RegisterSpawner(spawnPoint);
             }
         }
@@ -126,7 +128,7 @@ namespace CodeBase.Infrastructure.Services.Levels
                 if (spawnPoint != null)
                     spawnPoint.DestroySpawner();
             }
-            
+
             _objectHolder.SpawnPoints.Clear();
         }
 
@@ -134,21 +136,50 @@ namespace CodeBase.Infrastructure.Services.Levels
         {
             foreach (var enemy in _objectHolder.Enemies)
             {
-                if (enemy != null)
-                    enemy.GetComponent<EnemyDeath>().Die();
+                // if (enemy != null)
+                //     enemy.GetComponent<EnemyDeath>().Die();
             }
 
             _objectHolder.Enemies.Clear();
         }
 
-        public void OpenMainMenuWindow()
-        {
+        public void OpenMainMenuWindow() =>
             _windowService.Open(WindowId.MainMenu);
+
+        public void ClearPlanes()
+        {
+            foreach (var plate in _objectHolder.Plates)
+            {
+                if (plate != null)
+                    plate.GetComponent<PlateAttack>().Destroy();
+            }
+
+            _objectHolder.Plates.Clear();
         }
 
-        public void OpenRestartWindow()
+        public void ClearWaves()
         {
-            _windowService.Open(WindowId.PauseMenu);
+            foreach (var wave in _objectHolder.Waves)
+            {
+                if (wave != null)
+                    wave.GetComponent<DestroyBullet>().Destroy();
+            }
+
+            _objectHolder.Waves.Clear();
         }
+
+        public void ClearMines()
+        {
+            foreach (var mine in _objectHolder.Mines)
+            {
+                if (mine != null)
+                    mine.GetComponent<DestroyBullet>().Destroy();
+            }
+
+            _objectHolder.Mines.Clear();
+        }
+
+        public void OpenRestartWindow() =>
+            _windowService.Open(WindowId.PauseMenu);
     }
 }

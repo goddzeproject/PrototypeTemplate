@@ -19,8 +19,12 @@ namespace CodeBase.Infrastructure.Factory
         GameObject CreateHud();
         LootPiece CreateLoot();
 
-        SpawnPoint CreateSpawner(Vector3 at, string spawnerId, EnemyTypeId enemyTypeId, Vector3 spawnDirection, int unitsToSpawn, float spawnCooldown, float firstDelay);
+        SpawnPoint CreateSpawner(Vector3 at, string spawnerId, EnemyTypeId enemyTypeId, Vector3 spawnDirection,
+            int unitsToSpawn, float spawnCooldown, float firstDelay);
+
         GameObject CreateEnemy(EnemyTypeId typeId, Transform parent, Vector3 direction);
+
+        GameObject CreatePlate(Vector3 at);
 
         void CleanUp();
     }
