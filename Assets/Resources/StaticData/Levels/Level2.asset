@@ -1,0 +1,128 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cafcc3c49aa42bb920ecfe514d7f9f4, type: 3}
+  m_Name: Level2
+  m_EditorClassIdentifier: 
+  LevelKey: 2
+  EnemySpawners:
+  - Id: Main_ba7db045-fe9d-4e3b-863c-a20121722580
+    enemyTypeId: 0
+    Position: {x: -8.5, y: 0, z: -0.25}
+    SpawnDirection: {x: 1, y: 0, z: 0}
+    AmountEnemies: 2
+    SpawnCooldown: 6
+    FirstDelay: 1
+  - Id: Main_0fe809a0-d851-424d-a06b-071b92a71710
+    enemyTypeId: 0
+    Position: {x: -8.5, y: 0, z: 2.5}
+    SpawnDirection: {x: 1, y: 0, z: 0}
+    AmountEnemies: 2
+    SpawnCooldown: 6
+    FirstDelay: 0
+  - Id: Main_f0b6467b-4e04-4040-a3e2-9a78d74a0272
+    enemyTypeId: 0
+    Position: {x: 3.75, y: 0, z: 8}
+    SpawnDirection: {x: 0, y: 0, z: -1}
+    AmountEnemies: 4
+    SpawnCooldown: 4
+    FirstDelay: 1
+  - Id: Main_a9ad7240-9e9f-44fe-bf73-a08935826180
+    enemyTypeId: 0
+    Position: {x: 1.25, y: 0, z: 8}
+    SpawnDirection: {x: 0, y: 0, z: -1}
+    AmountEnemies: 4
+    SpawnCooldown: 4
+    FirstDelay: 1
+  - Id: Main_57e36692-bcd1-4362-a2a0-2eb3f280fd98
+    enemyTypeId: 0
+    Position: {x: -1.25, y: 0, z: 8}
+    SpawnDirection: {x: 0, y: 0, z: -1}
+    AmountEnemies: 4
+    SpawnCooldown: 4
+    FirstDelay: 0
+  - Id: Main_02eff135-e1b6-4b8a-aedd-aae4d4d03a95
+    enemyTypeId: 0
+    Position: {x: 8.190001, y: 0, z: -0.8499999}
+    SpawnDirection: {x: -1, y: 0, z: 0}
+    AmountEnemies: 4
+    SpawnCooldown: 3
+    FirstDelay: 0
+  - Id: Main_7b41c815-14c0-4dd9-8d0a-8ca7dbd53fb5
+    enemyTypeId: 0
+    Position: {x: 8.190001, y: 0, z: -2.85}
+    SpawnDirection: {x: -1, y: 0, z: 0}
+    AmountEnemies: 4
+    SpawnCooldown: 3
+    FirstDelay: 0
+  - Id: Main_abd97c32-b461-4042-8cb4-bda02bd9241b
+    enemyTypeId: 0
+    Position: {x: 8.190001, y: 0, z: -5.85}
+    SpawnDirection: {x: -1, y: 0, z: 0}
+    AmountEnemies: 4
+    SpawnCooldown: 3
+    FirstDelay: 0
+  - Id: Main_5e14e656-d523-4938-a252-1eb3148c401a
+    enemyTypeId: 0
+    Position: {x: -5.5, y: 0, z: 8}
+    SpawnDirection: {x: 0, y: 0, z: -1}
+    AmountEnemies: 3
+    SpawnCooldown: 3
+    FirstDelay: 0
+  - Id: Main_4ed0a201-e8ba-4a8c-bfa7-59fe738112d3
+    enemyTypeId: 0
+    Position: {x: -3.5, y: 0, z: 8}
+    SpawnDirection: {x: 0, y: 0, z: -1}
+    AmountEnemies: 4
+    SpawnCooldown: 4
+    FirstDelay: 0
+  - Id: Main_a33e73c4-a132-4eb4-af06-a0995fc869dc
+    enemyTypeId: 0
+    Position: {x: 8.25, y: 0, z: 4.75}
+    SpawnDirection: {x: -1, y: 0, z: -1}
+    AmountEnemies: 2
+    SpawnCooldown: 6
+    FirstDelay: 0
+  - Id: Main_3ad4ab9d-c83e-4812-95b8-45bdb8589848
+    enemyTypeId: 0
+    Position: {x: -1, y: 0, z: -7.75}
+    SpawnDirection: {x: 1, y: 0, z: 1}
+    AmountEnemies: 6
+    SpawnCooldown: 3
+    FirstDelay: 0
+  - Id: Main_449d1acb-434e-400f-8283-8fe02b6ba6a4
+    enemyTypeId: 0
+    Position: {x: -2.5, y: 0, z: -7.75}
+    SpawnDirection: {x: 1, y: 0, z: 1}
+    AmountEnemies: 4
+    SpawnCooldown: 2
+    FirstDelay: 0
+  - Id: Main_9abf8eff-d25b-4db3-a0c9-69f795d50a2a
+    enemyTypeId: 0
+    Position: {x: -4, y: 0, z: -7.75}
+    SpawnDirection: {x: 1, y: 0, z: 1}
+    AmountEnemies: 7
+    SpawnCooldown: 3
+    FirstDelay: 0
+  - Id: Main_d1fc6020-dd6f-4230-9582-076201042e9c
+    enemyTypeId: 0
+    Position: {x: -5.5, y: 0, z: -7.75}
+    SpawnDirection: {x: 1, y: 0, z: 1}
+    AmountEnemies: 2
+    SpawnCooldown: 4
+    FirstDelay: 0
+  - Id: SpawnMarker_c24d88a7-7f88-43af-a81a-304c56ca4231
+    enemyTypeId: 0
+    Position: {x: -7, y: 0, z: -7.75}
+    SpawnDirection: {x: 1, y: 0, z: 1}
+    AmountEnemies: 2
+    SpawnCooldown: 6
+    FirstDelay: 0
