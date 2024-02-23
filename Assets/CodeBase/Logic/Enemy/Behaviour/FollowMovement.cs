@@ -15,7 +15,10 @@ namespace CodeBase.Logic.Enemy.Behaviour
             _target = targetPosition;
 
         private void Start() =>
-            transform.rotation = Quaternion.LookRotation(_target.position);
+            Rotate(_target.position);
+
+        private Quaternion Rotate(Vector3 direction) => 
+            transform.rotation = Quaternion.LookRotation(direction);
 
         private void Update()
         {
@@ -31,6 +34,7 @@ namespace CodeBase.Logic.Enemy.Behaviour
         private void Following()
         {
             Vector3 _targetDirection = _target.position - transform.position;
+            Rotate(_targetDirection);
             _targetDirection.Normalize();
             transform.Translate(_targetDirection * (Speed * Time.deltaTime), Space.World);
             TimeFollowing -= Time.deltaTime;

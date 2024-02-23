@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1688651909725353651}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 9}
+  m_LocalPosition: {x: -9, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -45,11 +45,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f109412877494ea8b767f030698538a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyTypeId: 2
-  SpawnDirection: {x: 0, y: 0, z: -1}
+  enemyTypeId: 0
+  SpawnDirection: {x: 1, y: 0, z: 0}
   unitsToSpawn: 3
-  SpawnCooldown: 2
-  FirstDelay: 0
+  SpawnCooldown: 3
+  FirstDelay: 1
 --- !u!114 &7840381902459950304
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,4 +62,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfb9bba383c24274ba5d6b373cf5defc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Id: SpawnMarker_c24d88a7-7f88-43af-a81a-304c56ca4231
+  Id: Main_7f56a658-89aa-47b7-8dd6-514f87f0f1b9

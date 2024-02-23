@@ -1215,7 +1215,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccc6ca5841c54a898c236f470e0faa37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 2
+  Speed: 3
+  TimeFollowing: 10
 --- !u!114 &3959812421886769986 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1759886331324184333, guid: 274c4c35ed05ea14c87492064b3cadfd,
