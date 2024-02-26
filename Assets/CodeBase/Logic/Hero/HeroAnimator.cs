@@ -23,7 +23,6 @@ namespace CodeBase.Logic.Hero
     public AnimatorState State { get; private set; }
     
     public UnityEngine.Animator Animator;
-    public CharacterController CharacterController;
     public Rigidbody Rigidbody;
 
     private void Update()
