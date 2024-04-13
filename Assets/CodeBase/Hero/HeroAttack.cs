@@ -1,5 +1,7 @@
 ﻿using System;
 using CodeBase.Data;
+using CodeBase.Enemy;
+using CodeBase.Hero.Piano;
 using CodeBase.Infrastructure.Services;
 using CodeBase.Infrastructure.Services.Input;
 using CodeBase.Infrastructure.Services.PersistentProgress;
@@ -8,49 +10,46 @@ using UnityEngine;
 
 namespace CodeBase.Hero
 {
-    [RequireComponent(typeof(HeroAnimator), typeof(CharacterController))]
+    [RequireComponent(typeof(HeroAnimator))]
     public class HeroAttack : MonoBehaviour, ISavedProgressReader
     {
         public HeroAnimator HeroAnimator;
-        public CharacterController CharacterController;
         private IInputService _input;
-
-        private static int _layerMask;
+        
         private float radius;
-        private Collider[] _hits = new Collider[3];
         private Stats _stats;
+        private PianoKeyLogic pianoKey;
 
         private void Awake()
         {
             _input = AllServices.Container.Single<IInputService>();
-
-            _layerMask = 1 << LayerMask.NameToLayer("Hittable");
         }
 
-        private void Update()
+        private void OnTriggerEnter(Collider other)
         {
-            if(_input.IsAtackButtonUp() && !HeroAnimator.IsAttacking)
-                HeroAnimator.PlayAttack();
-            
-            if(_input.IsKeyDownPlay() && !HeroAnimator.IsAttacking)
-                HeroAnimator.PlayAttack();
+            pianoKey = other.gameObject.GetComponent<PianoKeyLogic>();
         }
 
-        public void OnAttack()
+
+        private void Update() => 
+            Play();
+
+        private void Play()
         {
-            for (int i = 0; i < Hit(); i++)
+            if (_input.IsAtackButtonUp())
             {
-                _hits[i].transform.parent.GetComponent<IHealth>().TakeDamage(_stats.Damage);
+                //HeroAnimator.PlayAttack();
+                
+            }
+            if (_input.IsKeyDownPlay())
+            {
+                //HeroAnimator.PlayAttack();
+                pianoKey.Play();
             }
         }
 
+
         public void LoadProgress(PlayerProgress progress) => 
             _stats = progress.HeroStats;
-
-        private int Hit() => 
-            Physics.OverlapSphereNonAlloc(StartPoint() + transform.forward, _stats.DamageRadius, _hits, _layerMask );
-
-        private Vector3 StartPoint() =>
-            new(transform.position.x, CharacterController.center.y / 2, transform.position.z);
     }
 }

@@ -75,7 +75,7 @@ namespace CodeBase.Infrastructure.Factory
         public GameObject CreateHero(GameObject at)
         {
             GameObject hero = InstantiateRegistered(AssetPath.HeroPath, at.transform.position);
-            hero.GetComponent<HeroMove>().Points = Piano.GetComponent<PianoLogic>().PianoKeys; 
+            hero.GetComponent<HeroMove>().Points = Piano.GetComponent<KeysStorage>().TargetKeys; 
             HeroGameObject = hero;
             return HeroGameObject;
         }
