@@ -14,6 +14,39 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LevelKey: Main
   EnemySpawners:
+  - Id: Main_c8e7d950-26b3-4e73-822f-5c55546e5604
+    MonsterTypeId: 0
+    Position: {x: -4, y: 0.25, z: -0.5}
+  - Id: Main_f81eb983-e657-4f9c-8757-410cc3348a87
+    MonsterTypeId: 0
+    Position: {x: -3.25, y: 0.25, z: -0.5}
+  - Id: Main_1040d3a0-c152-46bf-acfd-7a15fd20d6ce
+    MonsterTypeId: 0
+    Position: {x: -2.25, y: 0.25, z: -0.5}
+  - Id: Main_8a90e41b-ab10-4c5b-89c5-a90e8433398a
+    MonsterTypeId: 0
+    Position: {x: -1.75, y: 0.25, z: -0.5}
+  - Id: Main_37455469-a5df-4f99-bef1-b360013a7809
+    MonsterTypeId: 0
+    Position: {x: -1, y: 0.25, z: -0.5}
+  - Id: Main_fd89b26f-d390-4870-b630-bb7c37c1a722
+    MonsterTypeId: 0
+    Position: {x: -0.25, y: 0.25, z: -0.5}
+  - Id: Main_6eeae101-7032-4906-86ad-83032c0c7cee
+    MonsterTypeId: 0
+    Position: {x: 0.50000006, y: 0.25, z: -0.5}
+  - Id: Main_e0569a18-e3c2-4abf-a5bc-663969f1fa8b
+    MonsterTypeId: 0
+    Position: {x: 1.75, y: 0.25, z: -0.5}
+  - Id: Main_f5e38ccf-fe73-45a7-bee9-cf6f13d1df22
+    MonsterTypeId: 0
+    Position: {x: 2.25, y: 0.25, z: -0.5}
+  - Id: Main_1b9dbecb-f7ea-4a23-a5df-985ba98e4cbf
+    MonsterTypeId: 0
+    Position: {x: 3.25, y: 0.25, z: -0.5}
+  - Id: Main_0ca886d0-aea3-443b-aead-bcc2b1d29d1a
+    MonsterTypeId: 0
+    Position: {x: 4, y: 0.25, z: -0.5}
   - Id: Main_da7bb927-f72e-484b-87f8-86dfb0194fb1
     MonsterTypeId: 0
-    Position: {x: -4, y: 0, z: 3}
+    Position: {x: 4.75, y: 0.25, z: -0.5}

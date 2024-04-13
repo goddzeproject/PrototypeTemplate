@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using CodeBase.Data;
+﻿using CodeBase.Data;
+using CodeBase.Hero.Piano;
 using CodeBase.Infrastructure.Services;
 using CodeBase.Infrastructure.Services.Input;
 using CodeBase.Infrastructure.Services.PersistentProgress;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -14,7 +14,11 @@ namespace CodeBase.Hero
         public Transform[] Points;
         public int currentPos = 0;
         
+        private float cooldownTime = 0.1f;
+        private bool isColdown = false;
+        
         private IInputService _inputService;
+        private AnimationManager _animationManager;
         private HeroAnimator _heroAnimator;
         private CharacterController _characterController;
 
@@ -26,14 +30,15 @@ namespace CodeBase.Hero
 
         private void Start()
         {
+            _animationManager = AnimationManager.Instance;
             transform.position = Points[0].position;
         }
 
         private void Update()
         {
-            if (_inputService.IsKeyDownLeft() && !_heroAnimator.IsAttacking) 
+            if (_inputService.IsKeyDownLeft() && !isColdown) 
                 Move(0);
-            else if (_inputService.IsKeyDownRight() && !_heroAnimator.IsAttacking) 
+            else if (_inputService.IsKeyDownRight() && !isColdown) 
                 Move(1);
         }
         
@@ -41,25 +46,36 @@ namespace CodeBase.Hero
         {
             if (side == 0)
             {
-                // currentPos++;
-                // if (currentPos < 0)
-                //     currentPos = Points.Length - 1;
-                // transform.position = Points[currentPos].position;
                 currentPos = (currentPos - 1 + Points.Length) % Points.Length;
-                transform.position = Points[currentPos].position;
+                DoMove();
             }
             else if (side == 1)
             {
-                // currentPos--;
-                // if (currentPos >= Points.Length)
-                //     currentPos = Points.Length;
-                // transform.position = Points[currentPos].position;
                 currentPos = (currentPos + 1) % Points.Length;
-                transform.position = Points[currentPos].position;
+                DoMove();
             }
             Debug.Log(currentPos);
         }
 
+        private void DoMove()
+        {
+            // if (_animationManager.IsAnimationPlaying) return;
+            // _animationManager.StartAnimation();
+            
+            //Sequence jumpTween = DOTween.Sequence();
+            
+            transform.DOJump(Points[currentPos].position, 1, 1, 0.2f);
+            
+            isColdown = true;
+            Invoke("CooldownComplete", cooldownTime);
+            
+            // jumpTween.OnComplete(() =>_animationManager.StopAnimation());
+        }
+        
+        private void  CooldownComplete() => 
+            isColdown = false;
+
+        
         public void UpdateProgress(PlayerProgress progress) =>
             progress.WorldData.PositionOnLevel = new PositionOnLevel(CurrentLevel() ,transform.position.AsVectorData());
 
@@ -71,9 +87,7 @@ namespace CodeBase.Hero
                 if (savedPosition != null) 
                     Warp(to: savedPosition);
             }
-            
         }
-
         private void Warp(Vector3Data to)
         {
             _characterController.enabled = false;

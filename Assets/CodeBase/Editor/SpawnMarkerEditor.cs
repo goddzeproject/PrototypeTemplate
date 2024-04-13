@@ -11,7 +11,7 @@ namespace CodeBase.Editor
         public static void RenderCustomGizmo(SpawnMarker spawner, GizmoType gizmo)
         {
             Gizmos.color = Color.red;
-            Gizmos.DrawSphere(spawner.transform.position, 0.5f);
+            Gizmos.DrawSphere(spawner.transform.position, 0.1f);
         }
     }
 }
