@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using CodeBase.Enemy;
+using CodeBase.Hero;
+using CodeBase.Hero.Piano;
 using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.Infrastructure.Services;
 using CodeBase.Infrastructure.Services.PersistentProgress;
@@ -73,6 +75,7 @@ namespace CodeBase.Infrastructure.Factory
         public GameObject CreateHero(GameObject at)
         {
             GameObject hero = InstantiateRegistered(AssetPath.HeroPath, at.transform.position);
+            hero.GetComponent<HeroMove>().Points = Piano.GetComponent<PianoLogic>().PianoKeys; 
             HeroGameObject = hero;
             return HeroGameObject;
         }

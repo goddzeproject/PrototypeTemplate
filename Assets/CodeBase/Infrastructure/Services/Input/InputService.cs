@@ -7,7 +7,10 @@ namespace CodeBase.Infrastructure.Services.Input
         protected const string Horizontal = "Horizontal";
         protected const string Vertical = "Vertical";
         private const string Button = "Fire";
+        
         private const KeyCode Play = KeyCode.Space;
+        private const KeyCode Left = KeyCode.A;
+        private const KeyCode Right = KeyCode.D;
 
         public abstract Vector2 Axis { get; }
 
@@ -16,6 +19,12 @@ namespace CodeBase.Infrastructure.Services.Input
 
         public bool IsKeyDownPlay() => 
             SimpleInput.GetKeyDown(Play);
+
+        public bool IsKeyDownLeft() => 
+            SimpleInput.GetKeyDown(Left);
+
+        public bool IsKeyDownRight() => 
+            SimpleInput.GetKeyDown(Right);
 
         protected static Vector2 SimpleInputAxis() => 
             new(SimpleInput.GetAxis(Horizontal), SimpleInput.GetAxis(Vertical));

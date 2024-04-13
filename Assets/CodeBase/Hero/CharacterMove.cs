@@ -39,78 +39,73 @@ namespace CodeBase.Hero
         private void FixedUpdate()
         {
             Movement();
-            //Dash();
-            Friction();
-            
-            DebugSpeed();
         }
-
-        private void Dash()
-        {
-            if (_inputService.Axis.sqrMagnitude > Constants.Epsilon)
-            {
-                //do charge
-                var dashDirection = new Vector3(_inputService.Axis.x, 0, _inputService.Axis.y);
-                _rigidbody.velocity = dashDirection * dashForce;
-            }
-            
-        }
-
-        private void DebugSpeed()
-        {
-            //Debug.Log(_inputService.Axis);
-            Debug.Log(_inputService.Axis.sqrMagnitude);
-        }
+        //
+        // private void Dash()
+        // {
+        //     if (_inputService.Axis.sqrMagnitude > Constants.Epsilon)
+        //     {
+        //         //do charge
+        //         var dashDirection = new Vector3(_inputService.Axis.x, 0, _inputService.Axis.y);
+        //         _rigidbody.velocity = dashDirection * dashForce;
+        //     }
+        //     
+        // }
 
         private void Movement()
         {
-            float horizontalSpeed = _inputService.Axis.x * moveSpeed;
-            float verticalSpeed = _inputService.Axis.y * moveSpeed;
             
-            float speedDifX = horizontalSpeed - _rigidbody.velocity.x;
-            float speedDifY = verticalSpeed - _rigidbody.velocity.z;
-            float accelRateX = (Mathf.Abs(horizontalSpeed) > 0.01f) ? acceleration : decceleration;
-            float accelRateY = (Mathf.Abs(verticalSpeed) > 0.01f) ? acceleration : decceleration;
-            float movementX = Mathf.Pow(Mathf.Abs(speedDifX) * accelRateX, velPower) * Mathf.Sign(speedDifX);
-            float movementY = Mathf.Pow(Mathf.Abs(speedDifY) * accelRateY, velPower) * Mathf.Sign(speedDifY);
-            //_characterController.Move(new Vector3(movementX, 0, movementY) * Time.deltaTime);
-            _rigidbody.AddForce(new Vector3(movementX, 0, movementY), ForceMode.Force);
-            Rotation();
         }
 
-        private void Rotation()
-        {
-            if (_inputService.Axis.sqrMagnitude > Constants.Epsilon)
-            {
-                Vector3 direction = new Vector3(_inputService.Axis.x, 0, _inputService.Axis.y);
-                direction.Normalize();
+        // private void Movement()
+        // {
+        //     float horizontalSpeed = _inputService.Axis.x * moveSpeed;
+        //     float verticalSpeed = _inputService.Axis.y * moveSpeed;
+        //     
+        //     float speedDifX = horizontalSpeed - _rigidbody.velocity.x;
+        //     float speedDifY = verticalSpeed - _rigidbody.velocity.z;
+        //     float accelRateX = (Mathf.Abs(horizontalSpeed) > 0.01f) ? acceleration : decceleration;
+        //     float accelRateY = (Mathf.Abs(verticalSpeed) > 0.01f) ? acceleration : decceleration;
+        //     float movementX = Mathf.Pow(Mathf.Abs(speedDifX) * accelRateX, velPower) * Mathf.Sign(speedDifX);
+        //     float movementY = Mathf.Pow(Mathf.Abs(speedDifY) * accelRateY, velPower) * Mathf.Sign(speedDifY);
+        //     //_characterController.Move(new Vector3(movementX, 0, movementY) * Time.deltaTime);
+        //     _rigidbody.AddForce(new Vector3(movementX, 0, movementY), ForceMode.Force);
+        //     Rotation();
+        // }
 
-                Quaternion targetRotation = Quaternion.LookRotation(direction);
-                transform.rotation =
-                    Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
-                lastDirection = targetRotation;
-            }
-            else
-                transform.rotation =
-                    Quaternion.Slerp(transform.rotation, lastDirection, rotationSpeed * Time.deltaTime);
-        }
+        // private void Rotation()
+        // {
+        //     if (_inputService.Axis.sqrMagnitude > Constants.Epsilon)
+        //     {
+        //         Vector3 direction = new Vector3(_inputService.Axis.x, 0, _inputService.Axis.y);
+        //         direction.Normalize();
+        //
+        //         Quaternion targetRotation = Quaternion.LookRotation(direction);
+        //         transform.rotation =
+        //             Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        //         lastDirection = targetRotation;
+        //     }
+        //     else
+        //         transform.rotation =
+        //             Quaternion.Slerp(transform.rotation, lastDirection, rotationSpeed * Time.deltaTime);
+        // }
 
-        private void Friction()
-        {
-            if (Mathf.Abs(_inputService.Axis.x) < 0.01f)
-            {
-                float amountX = Mathf.Min(Mathf.Abs(_rigidbody.velocity.x), Mathf.Abs(frictionAmount));
-                amountX *= Mathf.Sign(_rigidbody.velocity.x);
-                _rigidbody.AddForce(Vector3.right * -amountX, ForceMode.Impulse);
-            }
-
-            if (Mathf.Abs(_inputService.Axis.y) < 0.01f)
-            {
-                float amountY = Mathf.Min(Mathf.Abs(_rigidbody.velocity.z), Mathf.Abs(frictionAmount));
-                amountY *= Mathf.Sign(_rigidbody.velocity.z);
-                _rigidbody.AddForce(Vector3.forward * -amountY, ForceMode.Impulse);
-            }
-        }
+        // private void Friction()
+        // {
+        //     if (Mathf.Abs(_inputService.Axis.x) < 0.01f)
+        //     {
+        //         float amountX = Mathf.Min(Mathf.Abs(_rigidbody.velocity.x), Mathf.Abs(frictionAmount));
+        //         amountX *= Mathf.Sign(_rigidbody.velocity.x);
+        //         _rigidbody.AddForce(Vector3.right * -amountX, ForceMode.Impulse);
+        //     }
+        //
+        //     if (Mathf.Abs(_inputService.Axis.y) < 0.01f)
+        //     {
+        //         float amountY = Mathf.Min(Mathf.Abs(_rigidbody.velocity.z), Mathf.Abs(frictionAmount));
+        //         amountY *= Mathf.Sign(_rigidbody.velocity.z);
+        //         _rigidbody.AddForce(Vector3.forward * -amountY, ForceMode.Impulse);
+        //     }
+        // }
 
         public void UpdateProgress(PlayerProgress progress) =>
             progress.WorldData.PositionOnLevel = new PositionOnLevel(CurrentLevel() ,transform.position.AsVectorData());

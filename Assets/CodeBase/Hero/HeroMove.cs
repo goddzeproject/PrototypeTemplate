@@ -1,4 +1,6 @@
-﻿using CodeBase.Data;
+﻿using System;
+using System.Collections.Generic;
+using CodeBase.Data;
 using CodeBase.Infrastructure.Services;
 using CodeBase.Infrastructure.Services.Input;
 using CodeBase.Infrastructure.Services.PersistentProgress;
@@ -9,8 +11,9 @@ namespace CodeBase.Hero
 {
     public class HeroMove : MonoBehaviour, ISavedProgress
     {
-        public float MovementSpeed;
-
+        public Transform[] Points;
+        public int currentPos = 0;
+        
         private IInputService _inputService;
         private HeroAnimator _heroAnimator;
         private CharacterController _characterController;
@@ -18,31 +21,44 @@ namespace CodeBase.Hero
         private void Awake()
         {
             _inputService = AllServices.Container.Single<IInputService>();
-
-            _characterController = GetComponent<CharacterController>();
             _heroAnimator = GetComponent<HeroAnimator>();
+        }
+
+        private void Start()
+        {
+            transform.position = Points[0].position;
         }
 
         private void Update()
         {
-            MoveCharacter();
+            if (_inputService.IsKeyDownLeft() && !_heroAnimator.IsAttacking) 
+                Move(0);
+            else if (_inputService.IsKeyDownRight() && !_heroAnimator.IsAttacking) 
+                Move(1);
         }
-
-        private void MoveCharacter()
+        
+        private void Move(int side)
         {
-            Vector3 movementVector = Vector3.zero;
-            if (!_heroAnimator.IsAttacking && _inputService.Axis.sqrMagnitude > Constants.Epsilon)
+            if (side == 0)
             {
-                movementVector = new Vector3(_inputService.Axis.x,0 ,_inputService.Axis.y  );
-                movementVector.Normalize();
-                transform.forward = movementVector;
+                // currentPos++;
+                // if (currentPos < 0)
+                //     currentPos = Points.Length - 1;
+                // transform.position = Points[currentPos].position;
+                currentPos = (currentPos - 1 + Points.Length) % Points.Length;
+                transform.position = Points[currentPos].position;
             }
-
-            movementVector += Physics.gravity;
-            
-            _characterController.Move(MovementSpeed * movementVector * Time.deltaTime);
+            else if (side == 1)
+            {
+                // currentPos--;
+                // if (currentPos >= Points.Length)
+                //     currentPos = Points.Length;
+                // transform.position = Points[currentPos].position;
+                currentPos = (currentPos + 1) % Points.Length;
+                transform.position = Points[currentPos].position;
+            }
+            Debug.Log(currentPos);
         }
-
 
         public void UpdateProgress(PlayerProgress progress) =>
             progress.WorldData.PositionOnLevel = new PositionOnLevel(CurrentLevel() ,transform.position.AsVectorData());

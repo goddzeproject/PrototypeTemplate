@@ -62,7 +62,6 @@ namespace CodeBase.Infrastructure.States
             InitSpawners();
             GameObject piano = InitPiano();
             GameObject hero = InitHero();
-
             InitHud(hero);
             GameObject vCamera = InitVirtualCamera();
             CameraFollow(vCamera, piano);

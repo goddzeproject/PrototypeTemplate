@@ -8,5 +8,7 @@ namespace CodeBase.Infrastructure.Services.Input
 
         bool IsAtackButtonUp();
         bool IsKeyDownPlay();
+        bool IsKeyDownLeft();
+        bool IsKeyDownRight();
     }
 }
