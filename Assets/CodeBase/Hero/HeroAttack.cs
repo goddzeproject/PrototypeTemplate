@@ -31,6 +31,9 @@ namespace CodeBase.Hero
         {
             if(_input.IsAtackButtonUp() && !HeroAnimator.IsAttacking)
                 HeroAnimator.PlayAttack();
+            
+            if(_input.IsKeyDownPlay() && !HeroAnimator.IsAttacking)
+                HeroAnimator.PlayAttack();
         }
 
         public void OnAttack()

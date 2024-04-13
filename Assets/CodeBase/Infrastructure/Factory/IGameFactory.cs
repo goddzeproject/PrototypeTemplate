@@ -21,5 +21,6 @@ namespace CodeBase.Infrastructure.Factory
         void CreateSpawner(Vector3 at, string spawnerId, MonsterTypeId monsterTypeId);
 
         void CleanUp();
+        GameObject CreatePiano(GameObject at);
     }
 }

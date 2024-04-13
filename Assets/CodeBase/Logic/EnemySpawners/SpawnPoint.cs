@@ -24,7 +24,7 @@ namespace CodeBase.Logic.EnemySpawners
                 _slain = true;
             else
             {
-                Spawn();
+                //Spawn();
             }
         }
 

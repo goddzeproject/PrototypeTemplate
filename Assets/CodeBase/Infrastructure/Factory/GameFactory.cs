@@ -30,6 +30,7 @@ namespace CodeBase.Infrastructure.Factory
 
         private GameObject HeroGameObject { get; set; }
         private GameObject VirtualCamera { get; set; }
+        private GameObject Piano { get; set; }
 
         public GameFactory(IAssets assets, IStaticDataService staticData, IRandomService random,
             IPersistentProgressService persistentProgressService, IWindowService windowService)
@@ -53,6 +54,13 @@ namespace CodeBase.Infrastructure.Factory
         {
             ProgressReaders.Clear();
             ProgressWriters.Clear();
+        }
+
+        public GameObject CreatePiano(GameObject at)
+        {
+            GameObject piano = InstantiateRegistered(AssetPath.Piano, at.transform.position);
+            Piano = piano;
+            return Piano;
         }
 
         public GameObject CreateVirtualCamera(GameObject at)

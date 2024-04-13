@@ -7,5 +7,6 @@ namespace CodeBase.Infrastructure.Services.Input
         Vector2 Axis { get; }
 
         bool IsAtackButtonUp();
+        bool IsKeyDownPlay();
     }
 }
