@@ -18,19 +18,15 @@ namespace CodeBase.Hero
         private bool isColdown = false;
         
         private IInputService _inputService;
-        private AnimationManager _animationManager;
-        private HeroAnimator _heroAnimator;
         private CharacterController _characterController;
+        private Animator _animator; 
 
-        private void Awake()
-        {
+        private void Awake() => 
             _inputService = AllServices.Container.Single<IInputService>();
-            _heroAnimator = GetComponent<HeroAnimator>();
-        }
 
         private void Start()
         {
-            _animationManager = AnimationManager.Instance;
+            _animator = GetComponent<Animator>();
             transform.position = Points[0].position;
         }
 
@@ -63,6 +59,9 @@ namespace CodeBase.Hero
             // _animationManager.StartAnimation();
             
             //Sequence jumpTween = DOTween.Sequence();
+            
+            // _animator.Play("GrabHold");
+            // _animator.Play("GrabRelease");
             
             transform.DOJump(Points[currentPos].position, 1, 1, 0.2f);
             

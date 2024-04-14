@@ -4,7 +4,7 @@ namespace CodeBase.Hero.Piano
 {
     public class NoteColorChanger : MonoBehaviour
     {
-        public float duration = 5f; // Продолжительность полного цикла изменения цвета
+        public float duration = 5f;
         public Material material;
 
         void Start()
@@ -16,7 +16,6 @@ namespace CodeBase.Hero.Piano
         {
             if (material != null)
             {
-                // Плавно изменяем оттенок от 0 до 1 за указанную продолжительность
                 float hue = Mathf.Repeat(Time.time / duration, 1f);
                 Color color = Color.HSVToRGB(hue, 1f, 1f);
                 material.color = color;

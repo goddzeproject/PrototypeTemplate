@@ -92,11 +92,11 @@ namespace CodeBase.Infrastructure.Factory
         {
             GameObject hud = InstantiateRegistered(AssetPath.HudPath);
 
-            hud.GetComponentInChildren<LootCounter>()
-                .Construct(_proggressService.Progress.WorldData);
-
-            foreach (OpenWindowButton openWindowButton in hud.GetComponentsInChildren<OpenWindowButton>())
-                openWindowButton.Construct(_windowService);
+            // hud.GetComponentInChildren<LootCounter>()
+            //     .Construct(_proggressService.Progress.WorldData);
+            //
+            // foreach (OpenWindowButton openWindowButton in hud.GetComponentsInChildren<OpenWindowButton>())
+            //     openWindowButton.Construct(_windowService);
 
             return hud;
         }

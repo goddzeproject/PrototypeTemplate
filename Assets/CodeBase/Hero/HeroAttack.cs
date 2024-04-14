@@ -6,6 +6,7 @@ using CodeBase.Infrastructure.Services.Input;
 using CodeBase.Infrastructure.Services.PersistentProgress;
 using DG.Tweening;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace CodeBase.Hero
 {
@@ -15,6 +16,7 @@ namespace CodeBase.Hero
         private IInputService _input;
         private AnimationManager _animationManager;
         private HeroMove _heroMove;
+        private Animator _animator;
 
         private Vector3 standingScale;
         private Vector3 squattingScale;
@@ -36,6 +38,7 @@ namespace CodeBase.Hero
             _heroMove = GetComponent<HeroMove>();
             standingScale = transform.localScale;
             squattingScale = new Vector3(standingScale.x, 0.5f, standingScale.z);
+            _animator = GetComponent<Animator>();
         }
 
 
@@ -50,11 +53,15 @@ namespace CodeBase.Hero
             }
             if ((_input.IsKeyDownPlaySpace() || _input.IsKeyDownPlayEnter()) && !isColdown)
             {
+                _animator.SetTrigger("Release");
+
+
                 Debug.Log(_heroMove.currentPos);
                 Squat(squattingScale); // animation 
-                
+
                 _animationManager.PlayAnimKey(_heroMove.currentPos);
-                
+                //ChangeColor();
+
                 isColdown = true;
                 Invoke("CooldownComplete", cooldownTime);
             }
@@ -74,7 +81,15 @@ namespace CodeBase.Hero
             squatSequence.OnComplete(() => isSquatting = false);
             
             // squatSequence.OnComplete(() => _animationManager.StopAnimation());
+            
         }
+
+        // private void ChangeColor()
+        // {
+        //     Color randomColor = new Color(Random.value, Random.value, Random.value);
+        //     // Устанавливаем этот случайный цвет в качестве цвета фона камеры
+        //     _camera.backgroundColor = randomColor;
+        // }
 
         private void  CooldownComplete() => 
             isColdown = false;

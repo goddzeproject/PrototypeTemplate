@@ -83,8 +83,8 @@ namespace CodeBase.Infrastructure.States
         private void InitHud(GameObject hero)
         {
             GameObject hud = _gameFactory.CreateHud();
-            hud.GetComponentInChildren<ActorUI>().
-                Construct(hero.GetComponent<HeroHealth>());
+            // hud.GetComponentInChildren<ActorUI>().
+            //     Construct(hero.GetComponent<HeroHealth>());
         }
 
         private GameObject InitHero() => 
