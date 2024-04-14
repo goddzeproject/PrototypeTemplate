@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
+using UnityEngine.Audio;
 
 [System.Serializable]
 public class Sounds
 {
-    public string Name;
+    public int NumberName;
 
     public AudioClip clip;
     
@@ -16,5 +17,6 @@ public class Sounds
     public bool Loop = false;
 
     [HideInInspector]
+    
     public AudioSource AudioSource;
 }

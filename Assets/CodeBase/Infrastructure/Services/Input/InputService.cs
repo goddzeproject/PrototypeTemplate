@@ -8,23 +8,35 @@ namespace CodeBase.Infrastructure.Services.Input
         protected const string Vertical = "Vertical";
         private const string Button = "Fire";
         
-        private const KeyCode Play = KeyCode.Space;
-        private const KeyCode Left = KeyCode.A;
-        private const KeyCode Right = KeyCode.D;
+        private const KeyCode PlaySpace = KeyCode.Space;
+        private const KeyCode LeftKey = KeyCode.A;
+        private const KeyCode RightKey = KeyCode.D;
+        private const KeyCode PlayEnter = KeyCode.Return;
+        private const KeyCode LeftArrow = KeyCode.LeftArrow;
+        private const KeyCode RightArrow = KeyCode.RightArrow;
 
         public abstract Vector2 Axis { get; }
 
         public bool IsAtackButtonUp() => 
             SimpleInput.GetButtonUp(Button);
 
-        public bool IsKeyDownPlay() => 
-            SimpleInput.GetKeyDown(Play);
+        public bool IsKeyDownPlaySpace() => 
+            SimpleInput.GetKeyDown(PlaySpace);
 
-        public bool IsKeyDownLeft() => 
-            SimpleInput.GetKeyDown(Left);
+        public bool IsKeyDownPlayEnter() => 
+            SimpleInput.GetKeyDown(PlayEnter);
 
-        public bool IsKeyDownRight() => 
-            SimpleInput.GetKeyDown(Right);
+        public bool IsKeyDownLeftKey() => 
+            SimpleInput.GetKeyDown(LeftKey);
+
+        public bool IsKeyDownRightKey() => 
+            SimpleInput.GetKeyDown(RightKey);
+
+        public bool IsKeyDownLeftArrow() => 
+            SimpleInput.GetKeyDown(LeftArrow);
+
+        public bool IsKeyDownRightArrow() => 
+            SimpleInput.GetKeyDown(RightArrow);
 
         protected static Vector2 SimpleInputAxis() => 
             new(SimpleInput.GetAxis(Horizontal), SimpleInput.GetAxis(Vertical));

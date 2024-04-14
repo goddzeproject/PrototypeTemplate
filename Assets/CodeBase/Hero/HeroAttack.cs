@@ -12,17 +12,17 @@ namespace CodeBase.Hero
     [RequireComponent(typeof(HeroAnimator))]
     public class HeroAttack : MonoBehaviour, ISavedProgressReader
     {
-        public HeroAnimator HeroAnimator;
         private IInputService _input;
         private AnimationManager _animationManager;
-        
+        private HeroMove _heroMove;
+
         private Vector3 standingScale;
         private Vector3 squattingScale;
+
         private bool isSquatting = false;
-        
+
         private float radius;
         private Stats _stats;
-        private PianoKeyLogic pianoKey;
 
         private float cooldownTime = 0.1f;
         private bool isColdown = false;
@@ -33,12 +33,10 @@ namespace CodeBase.Hero
         private void Start()
         {
             _animationManager = AnimationManager.Instance;
+            _heroMove = GetComponent<HeroMove>();
             standingScale = transform.localScale;
             squattingScale = new Vector3(standingScale.x, 0.5f, standingScale.z);
         }
-
-        private void OnTriggerEnter(Collider other) => 
-            pianoKey = other.gameObject.GetComponent<PianoKeyLogic>();
 
 
         private void Update() => 
@@ -50,14 +48,16 @@ namespace CodeBase.Hero
             {
                 
             }
-            if (_input.IsKeyDownPlay() && !isColdown)
+            if ((_input.IsKeyDownPlaySpace() || _input.IsKeyDownPlayEnter()) && !isColdown)
             {
-                Squat(squattingScale);
-                pianoKey.Play();
+                Debug.Log(_heroMove.currentPos);
+                Squat(squattingScale); // animation 
+                
+                _animationManager.PlayAnimKey(_heroMove.currentPos);
+                
                 isColdown = true;
                 Invoke("CooldownComplete", cooldownTime);
             }
-            
         }
         private void Squat(Vector3 squattingScale)
         {

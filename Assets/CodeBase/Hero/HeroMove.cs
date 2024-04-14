@@ -36,9 +36,9 @@ namespace CodeBase.Hero
 
         private void Update()
         {
-            if (_inputService.IsKeyDownLeft() && !isColdown) 
+            if ((_inputService.IsKeyDownLeftKey() || _inputService.IsKeyDownLeftArrow()) && !isColdown) 
                 Move(0);
-            else if (_inputService.IsKeyDownRight() && !isColdown) 
+            else if ((_inputService.IsKeyDownRightKey() || _inputService.IsKeyDownRightArrow()) && !isColdown) 
                 Move(1);
         }
         
@@ -54,7 +54,7 @@ namespace CodeBase.Hero
                 currentPos = (currentPos + 1) % Points.Length;
                 DoMove();
             }
-            Debug.Log(currentPos);
+            //Debug.Log(currentPos);
         }
 
         private void DoMove()

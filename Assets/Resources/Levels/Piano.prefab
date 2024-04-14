@@ -41,6 +41,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3233064847079057237}
   - component: {fileID: 7126063146088859725}
+  - component: {fileID: 5864210272938833279}
+  - component: {fileID: 4753998016936712205}
   m_Layer: 0
   m_Name: Piano
   m_TagString: Untagged
@@ -90,6 +92,45 @@ MonoBehaviour:
   - {fileID: 8095280478333868824}
   - {fileID: 7675732724635868717}
   - {fileID: 7275476460605273998}
+--- !u!114 &5864210272938833279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3082191494296900546}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f12ff966a0a455bb8c39298e2eb7459, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PianoKeyLogics:
+  - {fileID: 278990892303553904}
+  - {fileID: 1121399558587796449}
+  - {fileID: 169553414796758267}
+  - {fileID: 9173490201989938707}
+  - {fileID: 5561172416562049551}
+  - {fileID: 2373641008057891601}
+  - {fileID: 7807919340164674322}
+  - {fileID: 1340822486938298212}
+  - {fileID: 1758869697537074643}
+  - {fileID: 1038545975794881919}
+  - {fileID: 8170137821480662610}
+  - {fileID: 5514842282979377700}
+--- !u!114 &4753998016936712205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3082191494296900546}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1a41e51a3af42499da3a0bce2ed0e35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 5
+  material: {fileID: 2100000, guid: 9bf05dbea8422a94986def0449d99100, type: 2}
 --- !u!1 &3606211586696328944
 GameObject:
   m_ObjectHideFlags: 0
@@ -783,7 +824,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e94c914968342d690935534b1a13df9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Sound: Mi
   Note: 7
 --- !u!1 &250266425420192390 stripped
 GameObject:
@@ -824,7 +864,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e94c914968342d690935534b1a13df9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Sound: 
   Note: 1
 --- !u!1 &336847102748339220 stripped
 GameObject:
@@ -865,7 +904,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e94c914968342d690935534b1a13df9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Sound: Do
   Note: 11
 --- !u!1 &1567051065792560358 stripped
 GameObject:
@@ -906,7 +944,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e94c914968342d690935534b1a13df9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Sound: Re
   Note: 9
 --- !u!1 &1771054021363196672 stripped
 GameObject:
@@ -947,7 +984,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e94c914968342d690935534b1a13df9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Sound: Si
   Note: 0
 --- !u!1 &2877585075207671807 stripped
 GameObject:
@@ -988,7 +1024,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e94c914968342d690935534b1a13df9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Sound: 
   Note: 3
 --- !u!1 &3027687167214980634 stripped
 GameObject:
@@ -1029,7 +1064,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e94c914968342d690935534b1a13df9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Sound: Lya
   Note: 2
 --- !u!1 &4048938965403800778 stripped
 GameObject:
@@ -1070,7 +1104,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e94c914968342d690935534b1a13df9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Sound: 
   Note: 8
 --- !u!1 &4620504539362781906 stripped
 GameObject:
@@ -1144,7 +1177,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e94c914968342d690935534b1a13df9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Sound: Fa
   Note: 6
 --- !u!1 &7070760808470230015 stripped
 GameObject:
@@ -1185,7 +1217,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e94c914968342d690935534b1a13df9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Sound: 
   Note: 5
 --- !u!1 &7210297946538761431 stripped
 GameObject:
@@ -1226,7 +1257,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e94c914968342d690935534b1a13df9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Sound: Sol
   Note: 4
 --- !u!1 &8938036723887172297 stripped
 GameObject:
@@ -1267,5 +1297,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e94c914968342d690935534b1a13df9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Sound: RE
   Note: 10

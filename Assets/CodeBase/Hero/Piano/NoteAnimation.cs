@@ -6,14 +6,13 @@ namespace CodeBase.Hero.Piano
 {
     public class NoteAnimation : MonoBehaviour
     {
-        [SerializeField] private float riseHeight = 3f; // Насколько высоко будет подниматься объект
-        [SerializeField] private float swingStrength = 1f; // Амплитуда качания
-        [SerializeField] private float duration = 5f; // Продолжительность полной анимации
+        [SerializeField] private float riseHeight = 4f; // Насколько высоко будет подниматься объект
+        [SerializeField] private float swingStrength = 2f; // Амплитуда качания
+        [SerializeField] private float duration = 4f; // Продолжительность полной анимации
         [SerializeField] private int rotations = 2;
-        private void Start()
-        {
+        
+        private void Start() => 
             AnimNote();
-        }
 
         private void AnimNote()
         {
@@ -28,5 +27,6 @@ namespace CodeBase.Hero.Piano
             sequence.Play();
             sequence.OnComplete(() => Destroy(gameObject));
         }
+
     }
 }

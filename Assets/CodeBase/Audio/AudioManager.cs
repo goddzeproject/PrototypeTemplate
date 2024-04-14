@@ -1,14 +1,11 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager instance;
-
     public Sounds[] Sounds;
-
-    public string MainTheme;
-
     private void Awake()
     {
         if (instance == null)
@@ -32,14 +29,9 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    private void Start()
+    public void Play(int SoundName)
     {
-        Play(MainTheme);
-    }
-
-    public void Play(string SoundName)
-    {
-        Sounds s = Array.Find(Sounds, Sounds => Sounds.Name == SoundName);
+        Sounds s = Array.Find(Sounds, Sounds => Sounds.NumberName == SoundName);
         if (s == null)
         {
             return;

@@ -6,7 +6,7 @@ namespace CodeBase.Hero.Piano
     {
         public static AnimationManager Instance; // Статическая переменная для доступа к синглтону
 
-        public bool IsAnimationPlaying { get; private set; } // Свойство для отслеживания анимации
+        public PianoKeyLogic[] PianoKeyLogics;
 
         void Awake()
         {
@@ -16,19 +16,19 @@ namespace CodeBase.Hero.Piano
                 DontDestroyOnLoad(gameObject); // Убедитесь, что объект не удаляется при загрузке сцены
             }
             else
-            {
                 Destroy(gameObject);
-            }
         }
 
-        public void StartAnimation()
+        public void PlayAnimKey(int key)
         {
-            IsAnimationPlaying = true;
+            PianoKeyLogics[key].Play(key);
         }
+        
+        // public bool IsAnimationPlaying { get; private set; } // Свойство для отслеживания анимации
+        //
 
-        public void StopAnimation()
-        {
-            IsAnimationPlaying = false;
-        }   
+        //
+        // public void StartAnimation() => IsAnimationPlaying = true;
+        // public void StopAnimation() => IsAnimationPlaying = false;
     }
 }

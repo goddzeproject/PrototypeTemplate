@@ -7,8 +7,11 @@ namespace CodeBase.Infrastructure.Services.Input
         Vector2 Axis { get; }
 
         bool IsAtackButtonUp();
-        bool IsKeyDownPlay();
-        bool IsKeyDownLeft();
-        bool IsKeyDownRight();
+        bool IsKeyDownPlaySpace();
+        bool IsKeyDownPlayEnter();
+        bool IsKeyDownLeftKey();
+        bool IsKeyDownRightKey();
+        bool IsKeyDownLeftArrow();
+        bool IsKeyDownRightArrow();
     }
 }

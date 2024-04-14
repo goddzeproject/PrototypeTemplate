@@ -9,7 +9,6 @@ namespace CodeBase.Hero.Piano
 {
     public class PianoKeyLogic : MonoBehaviour
     {
-        public string Sound;
         public int Note;
         private AudioManager _audioManager;
         private ISpawnersHolderService _spawnersHolderService;
@@ -29,10 +28,10 @@ namespace CodeBase.Hero.Piano
             squattingScale = new Vector3(standingScale.x,standingScale.y, 0.5f);
         }
 
-        public void Play()
+        public void Play(int soundNumber)
         {
             Squat(squattingScale);
-            _audioManager.Play(Sound);
+            _audioManager.Play(soundNumber);
             SpawnNote();
 
         }
@@ -51,11 +50,12 @@ namespace CodeBase.Hero.Piano
             isSquatting = true;
             
             Sequence squatSequence = DOTween.Sequence();
-            squatSequence.Append(transform.DOScale(squattingScale, 0.2f).SetEase(Ease.InOutQuad));
-            squatSequence.Append(transform.DOScale(standingScale, 0.2f).SetEase(Ease.InOutQuad));
+            squatSequence.Append(transform.DOScale(squattingScale, 0.1f).SetEase(Ease.InOutQuad));
+            squatSequence.Append(transform.DOScale(standingScale, 0.1f).SetEase(Ease.InOutQuad));
             squatSequence.OnComplete(() => isSquatting = false);
-            
-            
+
+            //transform.DOScale(squattingScale, 0.1f).SetEase(Ease.InOutQuad); 
+
         }
     }
 }

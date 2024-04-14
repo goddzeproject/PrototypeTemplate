@@ -44,23 +44,77 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71efa5b0480f495a9523345f32c8a43f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Mixer: {fileID: 24100000, guid: c7d245f2f9fdd24469c05355a5d2e0b3, type: 2}
   Sounds:
-  - Name: DO
-    clip: {fileID: 8300000, guid: 5467e5c9ba0b14741bf566fd661332fe, type: 3}
+  - NumberName: 0
+    clip: {fileID: 8300000, guid: 185605eb32da2584ab66159e6c22af4f, type: 3}
     Volume: 1
     Pitch: 1
     Loop: 0
     AudioSource: {fileID: 0}
-  - Name: RE
-    clip: {fileID: 8300000, guid: d6f115ffa42e47a4ea52e83418d1020d, type: 3}
+  - NumberName: 1
+    clip: {fileID: 8300000, guid: c22a13386879836419921fae5bc8da77, type: 3}
     Volume: 1
     Pitch: 1
     Loop: 0
     AudioSource: {fileID: 0}
-  - Name: MI
-    clip: {fileID: 8300000, guid: 7f069a56dece8bf418f521ae872b6d5f, type: 3}
+  - NumberName: 2
+    clip: {fileID: 8300000, guid: a0da2030ab03fb44ca4542eb6f8c0f0d, type: 3}
     Volume: 1
     Pitch: 1
     Loop: 0
     AudioSource: {fileID: 0}
-  MainTheme: DO
+  - NumberName: 3
+    clip: {fileID: 8300000, guid: aaefb6ef447864b40987900ad0e2f4f0, type: 3}
+    Volume: 1
+    Pitch: 1
+    Loop: 0
+    AudioSource: {fileID: 0}
+  - NumberName: 4
+    clip: {fileID: 8300000, guid: badcdb74b0202e34388c59119850e4df, type: 3}
+    Volume: 1
+    Pitch: 1
+    Loop: 0
+    AudioSource: {fileID: 0}
+  - NumberName: 5
+    clip: {fileID: 8300000, guid: d5b1867e41616c84382fe6151ee68679, type: 3}
+    Volume: 1
+    Pitch: 1
+    Loop: 0
+    AudioSource: {fileID: 0}
+  - NumberName: 6
+    clip: {fileID: 8300000, guid: e074788c5ff8cf743bf4fdc42bb0b1a0, type: 3}
+    Volume: 1
+    Pitch: 1
+    Loop: 0
+    AudioSource: {fileID: 0}
+  - NumberName: 7
+    clip: {fileID: 8300000, guid: da2865a8a409efa4fac5dc9e69661d9d, type: 3}
+    Volume: 1
+    Pitch: 1
+    Loop: 0
+    AudioSource: {fileID: 0}
+  - NumberName: 8
+    clip: {fileID: 8300000, guid: 9f64ab4311500e044bef43cc012e412a, type: 3}
+    Volume: 1
+    Pitch: 1
+    Loop: 0
+    AudioSource: {fileID: 0}
+  - NumberName: 9
+    clip: {fileID: 8300000, guid: b48c47ec0becc5b44a642bcc467782ce, type: 3}
+    Volume: 1
+    Pitch: 1
+    Loop: 0
+    AudioSource: {fileID: 0}
+  - NumberName: 10
+    clip: {fileID: 8300000, guid: fd0bfd7b0956dd6428f500c77b4f36ed, type: 3}
+    Volume: 1
+    Pitch: 1
+    Loop: 0
+    AudioSource: {fileID: 0}
+  - NumberName: 11
+    clip: {fileID: 8300000, guid: 3b16e15090c1dab4696425108ef86a64, type: 3}
+    Volume: 1
+    Pitch: 1
+    Loop: 0
+    AudioSource: {fileID: 0}
